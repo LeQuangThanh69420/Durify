@@ -1,6 +1,6 @@
 [
     {
-        "musicId": 0,
+        "musicId": 1,
         "musicName": "Trước Khi Em Tồn Tại",
         "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716534542/samples/Durify/Tr%C6%B0%E1%BB%9Bc_Khi_Em_T%E1%BB%93n_T%E1%BA%A1i.mp3",
         "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716534548/samples/Durify/C%C3%A1i_%C4%90%E1%BA%A7u_Ti%C3%AAn.jpg",
@@ -8,7 +8,7 @@
         "musicNation": "VN"
     },
     {
-        "musicId": 0,
+        "musicId": 2,
         "musicName": "Thấy Chưa",
         "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716556970/samples/Durify/Th%E1%BA%A5y_Ch%C6%B0a.mp3",
         "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716556973/samples/Durify/Gieo.jpg",
@@ -16,7 +16,7 @@
         "musicNation": "VN"
     },
     {
-        "musicId": 0,
+        "musicId": 3,
         "musicName": "Library Of Ruina Theme02",
         "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716544889/samples/Durify/Library_Of_Ruina_Theme02.mp3",
         "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716544888/samples/Durify/Library_Of_Ruina.jpg",
@@ -24,7 +24,7 @@
         "musicNation": "KR"
     },
     {
-        "musicId": 0,
+        "musicId": 4,
         "musicName": "Lobotomy Corporation Second Warning",
         "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716545443/samples/Durify/Lobotomy_Corporation_Second_Warning.mp3",
         "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716545306/samples/Durify/Lobotomy_Corporation.jpg",
@@ -32,16 +32,47 @@
         "musicNation": "KR"
     },
     {
-        "musicId": 0,
+        "musicId": 5,
+        "musicName": "Vitality",
+        "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716569744/samples/Durify/Vitality_yenlx6.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716569764/samples/Durify/HellTaker_q9gia9.jpg",
+        "musicArtist": "Mittsies",
+        "musicNation": "US"
+    },
+    {
+        "musicId": 6,
+        "musicName": "Titanium",
+        "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716569751/samples/Durify/Titanium_lskcla.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716569764/samples/Durify/HellTaker_q9gia9.jpg",
+        "musicArtist": "Mittsies",
+        "musicNation": "US"
+    },
+    {
+        "musicId": 7,
+        "musicName": "Alchemy",
+        "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716569761/samples/Durify/Alchemy_or1oft.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716569764/samples/Durify/HellTaker_q9gia9.jpg",
+        "musicArtist": "Mittsies",
+        "musicNation": "US"
+    },
+    {
+        "musicId": 8,
         "musicName": "Seven",
         "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716556546/samples/Durify/Seven.mp3",
         "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716556638/samples/Durify/Seven_Weekend_Ver.jpg",
         "musicArtist": "Jung Kook",
         "musicNation": "KR"
     },
-
     {
-        "musicId": 0,
+        "musicId": 9,
+        "musicName": "DJ china 80",
+        "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716579633/samples/Durify/DJ_china_80_qdcycw.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716579672/samples/Durify/Reimu_ulrhaw.jpg",
+        "musicArtist": "unknown",
+        "musicNation": "CN"
+    },
+    {
+        "musicId": 10,
         "musicName": "From a Place of Love",
         "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716546219/samples/Durify/From_a_Place_of_Love.mp3",
         "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716545713/samples/Durify/Mili.png",
@@ -49,7 +80,7 @@
         "musicNation": "JP"
     },
     {
-        "musicId": 0,
+        "musicId": 11,
         "musicName": "Ocean Bby",
         "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716546222/samples/Durify/Ocean_Bby.mp3",
         "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716545713/samples/Durify/Mili.png",
@@ -57,7 +88,7 @@
         "musicNation": "JP"
     },
     {
-        "musicId": 0,
+        "musicId": 12,
         "musicName": "In Hell We Live, Lament",
         "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716546333/samples/Durify/In_Hell_We_Live_Lament.mp3",
         "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716545713/samples/Durify/Mili.png",
@@ -65,7 +96,7 @@
         "musicNation": "JP"
     },
     {
-        "musicId": 0,
+        "musicId": 13,
         "musicName": "I Can't Stop The Loneliness",
         "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716555714/samples/Durify/I_Cant_Stop_The_Loneliness.mp3",
         "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716556035/samples/Durify/Timely.jpg",
@@ -73,7 +104,7 @@
         "musicNation": "JP"
     },
     {
-        "musicId": 0,
+        "musicId": 14,
         "musicName": "NIGHT DANCER",
         "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716556073/samples/Durify/NIGHT_DANCER.mp3",
         "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716556076/samples/Durify/POP_CUBE.jpg",
@@ -81,16 +112,23 @@
         "musicNation": "JP"
     },
     {
-        "musicId": 0,
+        "musicId": 15,
         "musicName": "oddloop",
         "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716556309/samples/Durify/oddloop.mp3",
         "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716556312/samples/Durify/Oddloop.jpg",
         "musicArtist": "Frederic",
         "musicNation": "JP"
     },
-
     {
-        "musicId": 0,
+        "musicId": 16,
+        "musicName": "Renai Circulation",
+        "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716579313/samples/Durify/Renai_Circulation_sffjia.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716579318/samples/Durify/Renai_rbgb5u.jpg",
+        "musicArtist": "Hanazawa Kana",
+        "musicNation": "JP"
+    },
+    {
+        "musicId": 17,
         "musicName": "World's Smallest Violin",
         "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716554921/samples/Durify/Worlds_Smallest_Violin.mp3",
         "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716555398/samples/Durify/OK_Orchestra.png",
@@ -98,27 +136,147 @@
         "musicNation": "US"
     },
     {
-        "musicId": 0,
-        "musicName": "At My Worst",
-        "musicURL": "",
-        "musicImageURL": "",
-        "musicArtist": "Pink Sweat$",
+        "musicId": 18,
+        "musicName": "Slow Dancing in the Dark",
+        "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716564118/samples/Durify/Slow_Dancing_in_the_Dark.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716564129/samples/Durify/BALLADS1.png",
+        "musicArtist": "Joji",
         "musicNation": "US"
     },
     {
-        "musicId": 0,
-        "musicName": "",
-        "musicURL": "",
-        "musicImageURL": "",
-        "musicArtist": "",
-        "musicNation": ""
+        "musicId": 19,
+        "musicName": "Die For You",
+        "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716565121/samples/Durify/Die_For_You.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716565174/samples/Durify/SMITHEREENS.png",
+        "musicArtist": "Joji",
+        "musicNation": "US"
     },
     {
-        "musicId": 0,
-        "musicName": "",
-        "musicURL": "",
-        "musicImageURL": "",
-        "musicArtist": "",
-        "musicNation": ""
+        "musicId": 20,
+        "musicName": "Glimpse of Us",
+        "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716564497/samples/Durify/Glimpse_of_Us.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716565174/samples/Durify/SMITHEREENS.png",
+        "musicArtist": "Joji",
+        "musicNation": "US"
+    },
+    {
+        "musicId": 21,
+        "musicName": "I Can Do Anything / Finale",
+        "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716565230/samples/Durify/I_Can_Do_Anything_Finale.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716565233/samples/Durify/The_Boys_S3.png",
+        "musicArtist": "Christopher Lennertz",
+        "musicNation": "US"
+    },
+    {
+        "musicId": 22,
+        "musicName": "Come Inside of My Heart",
+        "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716562294/samples/Durify/Come_Inside_Of_My_Heart.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716562296/samples/Durify/CLAPCLAPCLAP.jpg",
+        "musicArtist": "IV Of Spades",
+        "musicNation": "PH"
+    },
+    {
+        "musicId": 23,
+        "musicName": "Di Na Muli",
+        "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716563408/samples/Durify/Di_Na_Muli.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716563593/samples/Durify/SidAya.jpg",
+        "musicArtist": "The Itchyworms",
+        "musicNation": "PH"
+    },
+    {
+        "musicId": 24,
+        "musicName": "Nightcall",
+        "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716565899/samples/Durify/Nightcall.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716565908/samples/Durify/NightcallAE.jpg",
+        "musicArtist": "Kavinsky",
+        "musicNation": "FR"
+    },
+    {
+        "musicId": 25,
+        "musicName": "As It Was",
+        "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716566963/samples/Durify/As_It_Was_q7oqkd.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716567009/samples/Durify/Harrys_House_pkkgad.png",
+        "musicArtist": "Harry Styles",
+        "musicNation": "UK"
+    },
+    {
+        "musicId": 26,
+        "musicName": "Until I Found You",
+        "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716567496/samples/Durify/Until_I_Found_You_zdx7ro.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716567507/samples/Durify/Easy_On_My_Eyes_aaqb3s.jpg",
+        "musicArtist": "Stephen Sanchez ",
+        "musicNation": "US"
+    },
+    {
+        "musicId": 27,
+        "musicName": "Bad Day",
+        "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716567773/samples/Durify/Bad_Day_rzrhir.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716567787/samples/Durify/DanielPowter_kyz2p7.jpg",
+        "musicArtist": "Daniel Powter",
+        "musicNation": "CA"
+    },
+    {
+        "musicId": 28,
+        "musicName": "A Man Without Love",
+        "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716567825/samples/Durify/A_Man_Without_Love_fxfsdh.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716567832/samples/Durify/AManWithoutLove_z7pzmv.jpg",
+        "musicArtist": "Engelbert Humperdinck",
+        "musicNation": "UK"
+    },
+    {
+        "musicId": 29,
+        "musicName": "Minuetto",
+        "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716572918/samples/Durify/Minuetto_h3zqbs.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716572929/samples/Durify/MinuettoClassic_ymkkr6.jpg",
+        "musicArtist": "Luigi Boccherini",
+        "musicNation": "IT"
+    },
+    {
+        "musicId": 30,
+        "musicName": "Careless Whisper",
+        "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716577304/samples/Durify/Careless_Whisper_sayw0o.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716577309/samples/Durify/Sex_Figure_hckv8k.jpg",
+        "musicArtist": "George Michael",
+        "musicNation": "UK"
+    },
+    {
+        "musicId": 31,
+        "musicName": "Undercover Martyn",
+        "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716577359/samples/Durify/Undercover_Martyn_fvspng.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716577433/samples/Durify/Tourist_History_tqmkjh.jpg",
+        "musicArtist": "Two Door Cinema Club",
+        "musicNation": "IE"
+    },
+    {
+        "musicId": 32,
+        "musicName": "Pumped Up Kicks",
+        "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716577455/samples/Durify/Pumped_Up_Kicks_dirohh.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716577459/samples/Durify/Torches_x1vxr4.jpg",
+        "musicArtist": "Foster The People",
+        "musicNation": "US"
+    },
+    {
+        "musicId": 33,
+        "musicName": "Freaks",
+        "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716578288/samples/Durify/Freaks_yqsjgr.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716578291/samples/Durify/Buds_kwzeeh.jpg",
+        "musicArtist": "Surf Curse",
+        "musicNation": "US"
+    },
+    {
+        "musicId": 34,
+        "musicName": "Don't Stop Me Now",
+        "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716578978/samples/Durify/Dont_Stop_Me_Now_zezd2w.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716579028/samples/Durify/Jazz_e3fbtb.jpg",
+        "musicArtist": "Queen",
+        "musicNation": "UK"
+    },
+    {
+        "musicId": 35,
+        "musicName": "suck a nigga dick",
+        "musicURL": "https://res.cloudinary.com/dslzbnfu8/video/upload/v1716578735/samples/Durify/suck_a_nigga_dick_tsrjda.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716578738/samples/Durify/suck_ebgjxq.png",
+        "musicArtist": "unknown",
+        "musicNation": "unknown"
     }
 ]
