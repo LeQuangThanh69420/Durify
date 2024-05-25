@@ -52,7 +52,5 @@ public class Music {
         this.musicArtist = musicArtist;
     }
 
-    public void setMusicNation(String musicNation) {
-        this.musicNation = musicNation;
-    }
+    public void setMusicNation(String musicNation) { this.musicNation = musicNation; }
 }
