@@ -3,13 +3,13 @@
     <item
         android:id="@+id/home"
         android:icon="@drawable/baseline_home_24"
-        android:title="Home"/>
+        android:title="@string/Home"/>
     <item
         android:id="@+id/playing"
         android:icon="@drawable/baseline_headphones_24"
-        android:title="Playing"/>
+        android:title="@string/Playing"/>
     <item
         android:id="@+id/downloaded"
         android:icon="@drawable/baseline_audio_file_24"
-        android:title="Downloaded"/>
+        android:title="@string/Downloaded"/>
 </menu>
