@@ -12,7 +12,12 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.List;
+import huce.duriu.durifyandroid.Model.Music;
+
+
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+    public static List<Music> musics;
     BottomNavigationView bottomNavigationView;
     HomeFragment homeFragment = new HomeFragment();
     PlayingFragment playingFragment = new PlayingFragment();
@@ -23,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.home);
