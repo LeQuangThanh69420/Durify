@@ -9,12 +9,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     BottomNavigationView bottomNavigationView;
+    HomeFragment homeFragment = new HomeFragment();
+    PlayingFragment playingFragment = new PlayingFragment();
+    DownloadedFragment downloadedFragment = new DownloadedFragment();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,25 +34,29 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         });
     }
 
-    //FirstFragment firstFragment = new FirstFragment();
-
     @Override
     public boolean
     onNavigationItemSelected(@NonNull MenuItem item)
     {
         if (item.getItemId() == R.id.home) {
-//            getSupportFragmentManager()
-//                    .beginTransaction()
-//                    .replace(R.id.flFragment, firstFragment)
-//                    .commit();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.flFragment, homeFragment)
+                    .commit();
             return true;
         }
         else if (item.getItemId() == R.id.playing) {
-            //
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.flFragment, playingFragment)
+                    .commit();
             return true;
         }
         else if (item.getItemId() == R.id.downloaded) {
-            //
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.flFragment, downloadedFragment)
+                    .commit();
             return true;
         }
         return false;
