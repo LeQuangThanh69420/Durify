@@ -2,4 +2,7 @@
     <string name="app_name">DurifyAndroid</string>
     <string name="logoDescription">DURIFY</string>
     <string name="DURIFY">DURIFY</string>
+    <string name="Home">Home</string>
+    <string name="Playing">Playing</string>
+    <string name="Downloaded">Downloaded</string>
 </resources>
