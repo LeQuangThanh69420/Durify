@@ -18,7 +18,7 @@ import huce.duriu.durifyandroid.Model.Music;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     public static List<Music> musics;
-    BottomNavigationView bottomNavigationView;
+    public static BottomNavigationView bottomNavigationView;
     HomeFragment homeFragment = new HomeFragment();
     PlayingFragment playingFragment = new PlayingFragment();
     DownloadedFragment downloadedFragment = new DownloadedFragment();
@@ -41,8 +41,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
 
     @Override
-    public boolean
-    onNavigationItemSelected(@NonNull MenuItem item)
+    public boolean onNavigationItemSelected(@NonNull MenuItem item)
     {
         if (item.getItemId() == R.id.home) {
             getSupportFragmentManager()
