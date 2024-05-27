@@ -6,12 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".DownloadedFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="d_fragment" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
