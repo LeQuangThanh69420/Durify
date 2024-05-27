@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import huce.duriu.durifyandroid.Model.Music;
@@ -44,7 +47,29 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        recyclerView = view.findViewById(R.id.musicList);
+        MusicAdapter adapter = new MusicAdapter(MainActivity.musics);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         EditText searchViewHome = view.findViewById(R.id.searchViewHome);
+        searchViewHome.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String query = editable.toString();
+                List<Music> musics = new ArrayList<>();
+                for (Music music : MainActivity.musics) {
+                    if (music.getMusicName().toLowerCase().contains(query.toLowerCase())) {
+                        musics.add(music);
+                    }
+                }
+                adapter.updateList(musics);
+            }
+        });
         searchViewHome.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 if (event.getRawX() >= (searchViewHome.getRight() - searchViewHome.getCompoundDrawables()[2].getBounds().width()*2)) {
@@ -59,12 +84,6 @@ public class HomeFragment extends Fragment {
             }
             return false;
         });
-
-        recyclerView = view.findViewById(R.id.musicList);
-        List<Music> musics = MainActivity.musics;
-        MusicAdapter adapter = new MusicAdapter(musics);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         return view;
     }
