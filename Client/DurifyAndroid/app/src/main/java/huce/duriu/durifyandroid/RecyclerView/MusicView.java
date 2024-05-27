@@ -12,11 +12,15 @@ import huce.duriu.durifyandroid.R;
 public class MusicView extends RecyclerView.ViewHolder {
 
 
-    private ImageView img;
+    private ImageView img, playMusic, downloadMusic;
     private TextView musicName, musicArtist, musicNation;
 
-    public ImageView getImg() {
-        return img;
+    public ImageView getImg() { return img; }
+    public ImageView getPlayMusic() {
+        return playMusic;
+    }
+    public ImageView getDownloadMusic() {
+        return downloadMusic;
     }
 
     public TextView getMusicName() {
@@ -52,5 +56,7 @@ public class MusicView extends RecyclerView.ViewHolder {
         musicName = itemView.findViewById(R.id.musicName);
         musicArtist = itemView.findViewById(R.id.musicArtist);
         musicNation = itemView.findViewById(R.id.musicNation);
+        playMusic = itemView.findViewById(R.id.playMusic);
+        downloadMusic = itemView.findViewById(R.id.downloadMusic);
     }
 }
