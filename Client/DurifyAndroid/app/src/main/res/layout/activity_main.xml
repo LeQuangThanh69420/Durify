@@ -21,6 +21,7 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:background="@color/primary"
+        app:labelVisibilityMode="selected"
         app:itemIconTint="@color/bottom_nav_item_color_selector"
         app:itemTextColor="@color/bottom_nav_item_color_selector"
         app:itemRippleColor="@android:color/transparent"
