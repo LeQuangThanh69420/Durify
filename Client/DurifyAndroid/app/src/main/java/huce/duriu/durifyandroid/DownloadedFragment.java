@@ -1,13 +1,17 @@
 package huce.duriu.durifyandroid;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +25,7 @@ public class DownloadedFragment extends Fragment {
 
     private static final int REQUEST_CODE_READ_MEDIA_AUDIO = 1;
     private MediaPlayer mediaPlayer;
+    private RecyclerView recyclerView;
 
     public DownloadedFragment() {
         // Required empty public constructor
@@ -50,7 +55,24 @@ public class DownloadedFragment extends Fragment {
         if (checkAndRequestPermissions()) {
             initializeRecyclerView(view);
         }
+        EditText searchViewDownloaded = view.findViewById(R.id.searchViewDownloaded);
+        searchViewDownloaded.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                if (event.getRawX() >= (searchViewDownloaded.getRight() - searchViewDownloaded.getCompoundDrawables()[2].getBounds().width()*2)) {
+                    searchViewDownloaded.setText("");
+                    searchViewDownloaded.clearFocus();
+                    InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if (imm.isAcceptingText()) {
+                        imm.hideSoftInputFromWindow(searchViewDownloaded.getWindowToken(), 0);
+                    }
+                    return true;
+                }
+            }
+            return false;
+        });
 
+        recyclerView = view.findViewById(R.id.downloadedList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         return view;
     }
 
@@ -72,7 +94,7 @@ public class DownloadedFragment extends Fragment {
     }
 
     private void initializeRecyclerView(View view) {
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = view.findViewById(R.id.downloadedList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         List<String> audioPaths = AudioFetcher.fetchAudioFilesFromMusicFolder(getContext());

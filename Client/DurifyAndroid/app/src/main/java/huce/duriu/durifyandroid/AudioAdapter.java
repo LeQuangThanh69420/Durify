@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.ViewHolder> {
@@ -54,7 +57,7 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.ViewHolder> 
 
         public ViewHolder(View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.textView);
+            textView = itemView.findViewById(R.id.musicName);
         }
     }
 }
