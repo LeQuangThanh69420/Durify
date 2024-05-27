@@ -1,58 +1,36 @@
 package huce.duriu.durifyandroid;
 
-import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
 
 public class DownloadedFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     private static final int REQUEST_CODE_READ_MEDIA_AUDIO = 1;
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private MediaPlayer mediaPlayer;
 
     public DownloadedFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DownloadedFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static DownloadedFragment newInstance(String param1, String param2) {
         DownloadedFragment fragment = new DownloadedFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString("ARG_PARAM1", param1);
+        args.putString("ARG_PARAM2", param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -61,14 +39,13 @@ public class DownloadedFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            // Get your parameters here if you have any
         }
     }
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_downloaded, container, false);
 
         if (checkAndRequestPermissions()) {
@@ -77,6 +54,7 @@ public class DownloadedFragment extends Fragment {
 
         return view;
     }
+
     private boolean checkAndRequestPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_MEDIA_AUDIO)
@@ -99,8 +77,27 @@ public class DownloadedFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         List<String> audioPaths = AudioFetcher.fetchAudioFilesFromMusicFolder(getContext());
-        AudioAdapter adapter = new AudioAdapter(getContext(), audioPaths);
+        AudioAdapter adapter = new AudioAdapter(getContext(), audioPaths, new AudioAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(String audioPath) {
+                playAudio(audioPath);
+            }
+        });
         recyclerView.setAdapter(adapter);
+    }
+
+    private void playAudio(String audioPath) {
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+        }
+        mediaPlayer = new MediaPlayer();
+        try {
+            mediaPlayer.setDataSource(audioPath);
+            mediaPlayer.prepare();
+            mediaPlayer.start();
+        } catch (Exception e) {
+            Toast.makeText(getContext(), "Cannot play audio: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -109,11 +106,23 @@ public class DownloadedFragment extends Fragment {
         if (requestCode == REQUEST_CODE_READ_MEDIA_AUDIO) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission granted, initialize RecyclerView
-                initializeRecyclerView(getView());
+                View view = getView();
+                if (view != null) {
+                    initializeRecyclerView(view);
+                }
             } else {
                 // Permission denied, handle appropriately
                 // You can show a message to the user or disable features that require this permission
             }
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
         }
     }
 }

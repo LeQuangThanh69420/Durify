@@ -6,16 +6,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
 
 public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.ViewHolder> {
     private Context context;
     private List<String> audioList;
+    private OnItemClickListener onItemClickListener;
 
-    public AudioAdapter(Context context, List<String> audioList) {
+    public interface OnItemClickListener {
+        void onItemClick(String audioPath);
+    }
+
+    public AudioAdapter(Context context, List<String> audioList, OnItemClickListener onItemClickListener) {
         this.context = context;
         this.audioList = audioList;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @Override
@@ -27,7 +32,16 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         String audioPath = audioList.get(position);
-        holder.textView.setText(audioPath);  // Bạn có thể hiển thị tên file thay vì đường dẫn
+        holder.textView.setText(audioPath);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick(audioPath);
+                }
+            }
+        });
     }
 
     @Override

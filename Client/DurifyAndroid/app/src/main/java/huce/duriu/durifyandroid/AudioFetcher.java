@@ -23,7 +23,7 @@ public class AudioFetcher {
         };
 
         String selection = MediaStore.Audio.Media.DATA + " LIKE ?";
-        String[] selectionArgs = new String[]{"%/Music/%"};
+        String[] selectionArgs = new String[]{"%/Download/%"};
 
         Cursor cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, MediaStore.Audio.Media.DATE_ADDED + " DESC");
 
