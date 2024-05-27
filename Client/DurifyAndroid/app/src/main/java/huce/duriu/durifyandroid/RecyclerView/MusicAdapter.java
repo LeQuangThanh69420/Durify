@@ -44,4 +44,9 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicView> {
 
     @Override
     public int getItemCount() { return musics.size(); }
+
+    public void updateList(List<Music> musics) {
+        this.musics = musics;
+        notifyDataSetChanged();
+    }
 }
