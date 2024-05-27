@@ -7,6 +7,28 @@
     android:layout_height="match_parent"
     tools:context=".PlayingFragment">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary"
+        android:paddingStart="12dp"
+        android:paddingTop="40dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="12dp"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:id="@+id/TitlePlaying"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Now playing:"
+            android:textSize="20sp"
+            android:textColor="@color/textPri"
+            android:singleLine="true"
+            android:padding="9dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/MusicImage"
         android:layout_width="250dp"
@@ -16,7 +38,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.284"
+        app:layout_constraintVertical_bias="0.332"
         app:shapeAppearanceOverlay="@style/circular"
         tools:src="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>
