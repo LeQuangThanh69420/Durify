@@ -1,7 +1,9 @@
 package huce.duriu.durifyandroid;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -64,8 +66,11 @@ public class LoadingActivity extends AppCompatActivity {
     }
 
     private boolean isNetworkConnected() {
-        //ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-        //return cm != null && ConnectivityManagerCompat.isActiveNetworkMetered(cm);
-        return true;
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (cm != null) {
+            NetworkInfo activeNetworkInfo = cm.getActiveNetworkInfo();
+            return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        }
+        else return false;
     }
 }
