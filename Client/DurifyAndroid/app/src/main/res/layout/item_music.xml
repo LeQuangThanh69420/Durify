@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="132dp"
     android:background="@drawable/search_view_background"
     android:padding="12dp"
     android:layout_marginTop="6dp"
@@ -11,7 +11,8 @@
         android:id="@+id/img"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginEnd="12dp"/>
+        android:layout_marginEnd="12dp"
+        />
     <LinearLayout
         android:layout_toRightOf="@+id/img"
         android:layout_width="wrap_content"
@@ -43,4 +44,21 @@
             android:layout_height="wrap_content" />
 
     </LinearLayout>
+    <ImageView
+        android:id="@+id/playMusic"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/logo"
+        android:layout_toLeftOf="@+id/downloadMusic"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"/>
+    <ImageView
+        android:id="@+id/downloadMusic"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/baseline_file_download_24"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"/>
+
 </RelativeLayout>
