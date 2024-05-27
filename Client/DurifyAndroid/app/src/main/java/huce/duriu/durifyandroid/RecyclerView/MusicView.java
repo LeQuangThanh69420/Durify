@@ -16,9 +16,11 @@ public class MusicView extends RecyclerView.ViewHolder {
     private TextView musicName, musicArtist, musicNation;
 
     public ImageView getImg() { return img; }
+
     public ImageView getPlayMusic() {
         return playMusic;
     }
+
     public ImageView getDownloadMusic() {
         return downloadMusic;
     }
@@ -50,6 +52,7 @@ public class MusicView extends RecyclerView.ViewHolder {
     public void setMusicNation(TextView musicNation) {
         this.musicNation = musicNation;
     }
+
     public MusicView(@NonNull View itemView) {
         super(itemView);
         img = itemView.findViewById(R.id.img);
