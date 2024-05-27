@@ -28,18 +28,11 @@ import retrofit2.Response;
 
 public class MusicAdapter extends RecyclerView.Adapter<MusicView> implements FileDownloadTask.DownloadListener {
     private List<Music> musics;
-    public List<Music> getMusics() {
-        return musics;
-    }
-    public void setListProduct(List<Music> musics) {
-        this.musics = musics;
-    }
+    public List<Music> getMusics() { return musics; }
+    public void setListProduct(List<Music> musics) { this.musics = musics; }
     private int selectedPosition = -1;
     public MusicAdapter(List<Music> musics) { this.musics = musics; }
-    public void updateUI() {
-        notifyDataSetChanged();
-    }
-
+    public void updateUI() { notifyDataSetChanged(); }
 
     @NonNull
     @Override
