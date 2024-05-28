@@ -58,7 +58,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicView> implements Fil
         });
 
         holder.getPlayMusic().setOnClickListener(v -> {
-
+            MainActivity.bottomNavigationView.setSelectedItemId(R.id.playing);
         });
 
         holder.getDownloadMusic().setOnClickListener(v -> {
@@ -69,7 +69,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicView> implements Fil
                 FileDownloadTask downloadTask = new FileDownloadTask(newAudioPath, this);
                 downloadTask.execute(music.getMusicURL());
                 MainActivity.audios.add(0, newAudio);
-                Toast.makeText(holder.itemView.getContext(), "Deleted " + newAudioName + " successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(holder.itemView.getContext(), "Download " + newAudioName + " successfully", Toast.LENGTH_SHORT).show();
             }
             else {
                 Toast.makeText(holder.itemView.getContext(), "This music is already downloaded", Toast.LENGTH_SHORT).show();

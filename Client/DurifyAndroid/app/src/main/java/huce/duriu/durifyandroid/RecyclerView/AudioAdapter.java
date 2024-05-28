@@ -15,6 +15,7 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 import java.util.List;
 
+import huce.duriu.durifyandroid.Activity.MainActivity;
 import huce.duriu.durifyandroid.File.FileDownloadTask;
 import huce.duriu.durifyandroid.Model.Music;
 import huce.duriu.durifyandroid.R;
@@ -63,7 +64,7 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioView> {
         });
 
         holder.getPlayAudio().setOnClickListener(v -> {
-
+            MainActivity.bottomNavigationView.setSelectedItemId(R.id.playing);
         });
 
         holder.getDeleteAudio().setOnClickListener(v -> {
