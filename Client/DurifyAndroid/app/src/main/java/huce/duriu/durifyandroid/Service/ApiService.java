@@ -1,4 +1,4 @@
-package huce.duriu.durifyandroid.Api;
+package huce.duriu.durifyandroid.Service;
 
 import java.util.List;
 
