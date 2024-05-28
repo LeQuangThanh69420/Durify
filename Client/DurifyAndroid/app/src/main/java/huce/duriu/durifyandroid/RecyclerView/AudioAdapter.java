@@ -71,7 +71,7 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioView> {
             String delAudioName = audio.getMusicName();
             String delAudioPath = AudioService.path + delAudioName;
             File fileToDelete = new File(delAudioPath);
-            //if (fileToDelete.exists()) {
+            if (fileToDelete.exists()) {
                 if (fileToDelete.delete()) {
                     Toast.makeText(v.getContext(), "Deleted " + delAudioName + " successfully", Toast.LENGTH_SHORT).show();
                     audios.remove(position);
@@ -80,9 +80,9 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioView> {
                 } else {
                     Toast.makeText(v.getContext(), "Failed to delete file", Toast.LENGTH_SHORT).show();
                 }
-            //} else {
-                //Toast.makeText(v.getContext(), "File not found", Toast.LENGTH_SHORT).show();
-            //}
+            } else {
+                Toast.makeText(v.getContext(), "File not found", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 

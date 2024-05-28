@@ -10,6 +10,9 @@ public class Music {
     private String musicArtist;
     private String musicNation;
 
+    public Music() {
+    }
+
     public Music(String musicName, String musicURL) {
         this.musicName = musicName;
         this.musicURL = musicURL;
