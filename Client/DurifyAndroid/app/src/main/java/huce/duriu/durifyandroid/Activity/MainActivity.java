@@ -1,5 +1,6 @@
 package huce.duriu.durifyandroid.Activity;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -24,6 +25,7 @@ import huce.duriu.durifyandroid.R;
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     public static List<Music> musics;
     public static List<Music> audios;
+    public static MediaPlayer mediaPlayer;
     public static BottomNavigationView bottomNavigationView;
     HomeFragment homeFragment = new HomeFragment();
     PlayingFragment playingFragment = new PlayingFragment();
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+        mediaPlayer = new MediaPlayer();
+        
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.home);
