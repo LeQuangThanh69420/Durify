@@ -1,5 +1,6 @@
-package huce.duriu.durifyandroid;
+package huce.duriu.durifyandroid.Activity;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -13,11 +14,19 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
+
+import huce.duriu.durifyandroid.Fragment.DownloadedFragment;
+import huce.duriu.durifyandroid.Fragment.HomeFragment;
+import huce.duriu.durifyandroid.Fragment.PlayingFragment;
 import huce.duriu.durifyandroid.Model.Music;
+import huce.duriu.durifyandroid.R;
 
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     public static List<Music> musics;
+    public static List<Music> audios;
+    //public static Music currentPlay;
+    public static MediaPlayer mediaPlayer;
     public static BottomNavigationView bottomNavigationView;
     HomeFragment homeFragment = new HomeFragment();
     PlayingFragment playingFragment = new PlayingFragment();
@@ -28,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
+        mediaPlayer = new MediaPlayer();
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
@@ -65,5 +76,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mediaPlayer.release();
+        mediaPlayer = null;
     }
 }
