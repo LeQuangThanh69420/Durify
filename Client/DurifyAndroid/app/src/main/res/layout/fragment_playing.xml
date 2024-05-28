@@ -40,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@+id/header"
         app:layout_constraintVertical_bias="0.201"
         app:shapeAppearanceOverlay="@style/circular"
-        tools:src="@tools:sample/avatars" />
+        tools:src="@tools:sample/avatars[11]" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -107,9 +107,6 @@
         app:layout_constraintTop_toBottomOf="@+id/mediaPlayer"
         app:layout_constraintVertical_bias="0.179">
 
-        <TextView
-            android:layout_width="30dp"
-            android:layout_height="30dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
