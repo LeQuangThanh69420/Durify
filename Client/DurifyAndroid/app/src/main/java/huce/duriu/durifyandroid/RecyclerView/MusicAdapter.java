@@ -62,9 +62,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicView> implements Fil
             MainActivity.bottomNavigationView.setSelectedItemId(R.id.playing);
 
             try {
-                if(MainActivity.mediaPlayer.isPlaying()) {
-                    MainActivity.mediaPlayer.reset();
-                }
+                MainActivity.mediaPlayer.reset();
                 MainActivity.mediaPlayer.setDataSource(music.getMusicURL());
                 MainActivity.mediaPlayer.prepare();
                 MainActivity.mediaPlayer.start();

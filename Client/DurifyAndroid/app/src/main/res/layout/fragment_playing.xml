@@ -21,7 +21,7 @@
             android:id="@+id/TitlePlaying"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Now playing: Sac ka niga di"
+            android:text="Nothing is playing right now"
             android:textSize="20sp"
             android:textColor="@color/textPri"
             android:singleLine="true"
