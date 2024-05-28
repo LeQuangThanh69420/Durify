@@ -5,7 +5,7 @@
     android:background="@color/secondary"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PlayingFragment">
+    tools:context=".Fragment.PlayingFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"

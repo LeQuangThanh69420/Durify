@@ -6,7 +6,7 @@
     android:background="@color/primary"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoadingActivity">
+    tools:context=".Activity.LoadingActivity">
     <ImageView
         android:id="@+id/logoImageView"
         android:layout_width="wrap_content"

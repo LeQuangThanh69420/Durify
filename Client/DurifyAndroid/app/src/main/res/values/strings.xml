@@ -6,4 +6,5 @@
     <string name="Playing">Playing</string>
     <string name="Downloaded">Downloaded</string>
     <string name="musicName">Music name</string>
+    <string name="audioName">File name</string>
 </resources>

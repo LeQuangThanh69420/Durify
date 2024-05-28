@@ -1,4 +1,4 @@
-package huce.duriu.durifyandroid.Api;
+package huce.duriu.durifyandroid.Service;
 
 import retrofit2.converter.gson.GsonConverterFactory;
 
