@@ -25,7 +25,7 @@ import huce.duriu.durifyandroid.R;
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     public static List<Music> musics;
     public static List<Music> audios;
-    public static Music currentPlay;
+    //public static Music currentPlay;
     public static MediaPlayer mediaPlayer;
     public static BottomNavigationView bottomNavigationView;
     HomeFragment homeFragment = new HomeFragment();

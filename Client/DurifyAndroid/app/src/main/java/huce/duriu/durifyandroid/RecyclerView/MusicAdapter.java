@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.util.List;
 
 import huce.duriu.durifyandroid.Activity.MainActivity;
@@ -59,6 +60,18 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicView> implements Fil
 
         holder.getPlayMusic().setOnClickListener(v -> {
             MainActivity.bottomNavigationView.setSelectedItemId(R.id.playing);
+
+            try {
+                if(MainActivity.mediaPlayer.isPlaying()) {
+                    MainActivity.mediaPlayer.reset();
+                }
+                MainActivity.mediaPlayer.setDataSource(music.getMusicURL());
+                MainActivity.mediaPlayer.prepare();
+                MainActivity.mediaPlayer.start();
+            }
+            catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         });
 
         holder.getDownloadMusic().setOnClickListener(v -> {
