@@ -1,25 +1,30 @@
-package huce.duriu.durifyandroid;
+package huce.duriu.durifyandroid.Fragment;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 import java.util.List;
+
+import huce.duriu.durifyandroid.Activity.MainActivity;
+import huce.duriu.durifyandroid.Model.Music;
+import huce.duriu.durifyandroid.R;
+import huce.duriu.durifyandroid.RecyclerView.AudioAdapter;
 
 public class DownloadedFragment extends Fragment {
 
@@ -31,6 +36,7 @@ public class DownloadedFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @NonNull
     public static DownloadedFragment newInstance(String param1, String param2) {
         DownloadedFragment fragment = new DownloadedFragment();
         Bundle args = new Bundle();
@@ -42,7 +48,6 @@ public class DownloadedFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            // Get your parameters here if you have any
         }
     }
 
@@ -52,10 +57,29 @@ public class DownloadedFragment extends Fragment {
 		// Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_downloaded, container, false);
 
-        if (checkAndRequestPermissions()) {
-            initializeRecyclerView(view);
-        }
+        recyclerView = view.findViewById(R.id.downloadedList);
+        AudioAdapter adapter = new AudioAdapter(MainActivity.audios);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         EditText searchViewDownloaded = view.findViewById(R.id.searchViewDownloaded);
+        searchViewDownloaded.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String query = editable.toString();
+                List<Music> audios = new ArrayList<>();
+                for (Music audio : MainActivity.audios) {
+                    if (audio.getMusicName().toLowerCase().contains(query.toLowerCase())) {
+                        audios.add(audio);
+                    }
+                }
+                adapter.updateList(audios);
+            }
+        });
         searchViewDownloaded.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 if (event.getRawX() >= (searchViewDownloaded.getRight() - searchViewDownloaded.getCompoundDrawables()[2].getBounds().width()*2)) {
@@ -71,11 +95,11 @@ public class DownloadedFragment extends Fragment {
             return false;
         });
 
-        recyclerView = view.findViewById(R.id.downloadedList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         return view;
     }
 
+    //////////////////////////////////////////////////////////////////////
+    /*
     private boolean checkAndRequestPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_MEDIA_AUDIO)
@@ -91,20 +115,6 @@ public class DownloadedFragment extends Fragment {
             }
         }
         return true;
-    }
-
-    private void initializeRecyclerView(View view) {
-        RecyclerView recyclerView = view.findViewById(R.id.downloadedList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        List<String> audioPaths = AudioFetcher.fetchAudioFilesFromMusicFolder(getContext());
-        AudioAdapter adapter = new AudioAdapter(getContext(), audioPaths, new AudioAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(String audioPath) {
-                playAudio(audioPath);
-            }
-        });
-        recyclerView.setAdapter(adapter);
     }
 
     private void playAudio(String audioPath) {
@@ -145,5 +155,5 @@ public class DownloadedFragment extends Fragment {
             mediaPlayer.release();
             mediaPlayer = null;
         }
-    }
+    }*/
 }

@@ -1,4 +1,4 @@
-package huce.duriu.durifyandroid;
+package huce.duriu.durifyandroid.Service;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -8,9 +8,12 @@ import android.provider.MediaStore;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AudioFetcher {
-    public static List<String> fetchAudioFilesFromMusicFolder(Context context) {
-        List<String> audioPaths = new ArrayList<>();
+import huce.duriu.durifyandroid.Model.Music;
+
+public class AudioService {
+    public static String path = "/storage/emulated/0/Download/";
+    public static List<Music> fetchAudioFilesFromMusicFolder(Context context) {
+        List<Music> audios = new ArrayList<>();
 
         Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         String[] projection = {
@@ -23,7 +26,7 @@ public class AudioFetcher {
         };
 
         String selection = MediaStore.Audio.Media.DATA + " LIKE ?";
-        String[] selectionArgs = new String[]{"%/Download/%"};
+        String[] selectionArgs = new String[]{path + "%"};
 
         Cursor cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, MediaStore.Audio.Media.DATE_ADDED + " DESC");
 
@@ -31,11 +34,11 @@ public class AudioFetcher {
             while (cursor.moveToNext()) {
                 int dataIndex = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
                 String filePath = cursor.getString(dataIndex);
-                audioPaths.add(filePath);
+                audios.add(new Music(filePath.replace(path, ""), filePath));
             }
             cursor.close();
         }
 
-        return audioPaths;
+        return audios;
     }
 }

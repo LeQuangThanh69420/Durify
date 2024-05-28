@@ -1,8 +1,9 @@
-package huce.duriu.durifyandroid;
+package huce.duriu.durifyandroid.Fragment;
 
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +20,9 @@ import android.widget.EditText;
 import java.util.ArrayList;
 import java.util.List;
 
+import huce.duriu.durifyandroid.Activity.MainActivity;
 import huce.duriu.durifyandroid.Model.Music;
+import huce.duriu.durifyandroid.R;
 import huce.duriu.durifyandroid.RecyclerView.MusicAdapter;
 
 public class HomeFragment extends Fragment {
@@ -28,6 +31,7 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @NonNull
     public static HomeFragment newInstance(String param1, String param2) {
         HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();

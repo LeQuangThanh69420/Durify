@@ -1,4 +1,4 @@
-package huce.duriu.durifyandroid;
+package huce.duriu.durifyandroid.Activity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -13,11 +13,17 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
+
+import huce.duriu.durifyandroid.Fragment.DownloadedFragment;
+import huce.duriu.durifyandroid.Fragment.HomeFragment;
+import huce.duriu.durifyandroid.Fragment.PlayingFragment;
 import huce.duriu.durifyandroid.Model.Music;
+import huce.duriu.durifyandroid.R;
 
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     public static List<Music> musics;
+    public static List<Music> audios;
     public static BottomNavigationView bottomNavigationView;
     HomeFragment homeFragment = new HomeFragment();
     PlayingFragment playingFragment = new PlayingFragment();

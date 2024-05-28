@@ -10,25 +10,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import huce.duriu.durifyandroid.R;
 
 public class AudioView extends RecyclerView.ViewHolder {
-    private ImageView playMusic, downloadMusic;
-    private TextView musicName;
+    private ImageView playAudio, deleteAudio;
+    private TextView audioName;
 
-    public ImageView getPlayMusic() { return playMusic; }
+    public ImageView getPlayAudio() { return playAudio; }
 
-    public ImageView getDownloadMusic() { return downloadMusic; }
+    public ImageView getDeleteAudio() { return deleteAudio; }
 
-    public TextView getMusicName() { return musicName; }
+    public TextView getAudioName() { return audioName; }
 
-    public void setPlayMusic(ImageView playMusic) { this.playMusic = playMusic; }
+    public void setPlayAudio(ImageView playAudio) { this.playAudio = playAudio; }
 
-    public void setDownloadMusic(ImageView downloadMusic) { this.downloadMusic = downloadMusic; }
+    public void setDeleteAudio(ImageView deleteAudio) { this.deleteAudio = deleteAudio; }
 
-    public void setMusicName(TextView musicName) { this.musicName = musicName; }
+    public void setAudioName(TextView audioName) { this.audioName = audioName; }
 
     public AudioView(@NonNull View itemView) {
         super(itemView);
-        //musicName = itemView.findViewById(R.id.audioName);
-        //playMusic = itemView.findViewById(R.id.playMusic);
-        //downloadMusic = itemView.findViewById(R.id.downloadMusic);
+        audioName = itemView.findViewById(R.id.audioName);
+        playAudio = itemView.findViewById(R.id.playAudio);
+        deleteAudio = itemView.findViewById(R.id.deleteAudio);
     }
 }

@@ -1,7 +1,9 @@
-package huce.duriu.durifyandroid;
+package huce.duriu.durifyandroid.Activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -9,17 +11,20 @@ import android.os.Handler;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
-import androidx.core.net.ConnectivityManagerCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import huce.duriu.durifyandroid.Api.ApiService;
-import huce.duriu.durifyandroid.Api.Retrofit;
+import huce.duriu.durifyandroid.Service.ApiService;
+import huce.duriu.durifyandroid.Service.Retrofit;
+import huce.duriu.durifyandroid.Service.AudioService;
 import huce.duriu.durifyandroid.Model.Music;
+import huce.duriu.durifyandroid.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,6 +43,8 @@ public class LoadingActivity extends AppCompatActivity {
         });
 
         this.getMusicList();
+        this.getAudioList();
+
         new Handler().postDelayed(() -> {
             startActivity(new Intent(LoadingActivity.this, MainActivity.class));
             finish();
@@ -72,5 +79,9 @@ public class LoadingActivity extends AppCompatActivity {
             return activeNetworkInfo != null && activeNetworkInfo.isConnected();
         }
         else return false;
+    }
+
+    private void getAudioList() {
+        MainActivity.audios = AudioService.fetchAudioFilesFromMusicFolder(getApplicationContext());
     }
 }

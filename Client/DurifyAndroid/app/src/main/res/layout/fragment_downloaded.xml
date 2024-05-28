@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DownloadedFragment">
+    android:background="@color/secondary"
+    tools:context=".Fragment.DownloadedFragment">
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/header"
+        android:id="@+id/headerDownloaded"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/primary"
@@ -23,7 +25,7 @@
             android:drawableStart="@drawable/baseline_search_24"
             android:drawableEnd="@drawable/baseline_close_24"
             android:textColorHint="@color/textSec"
-            android:hint="@string/musicName"
+            android:hint="@string/audioName"
             android:textColor="@color/textPri"
             android:singleLine="true"
             android:padding="12dp" />
@@ -32,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="120dp"
-        app:layout_constraintTop_toBottomOf="@+id/header">
+        app:layout_constraintTop_toBottomOf="@+id/headerDownloaded">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/downloadedList"
             android:layout_width="match_parent"
