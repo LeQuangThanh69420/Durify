@@ -27,9 +27,6 @@ import huce.duriu.durifyandroid.R;
 import huce.duriu.durifyandroid.RecyclerView.AudioAdapter;
 
 public class DownloadedFragment extends Fragment {
-
-    private static final int REQUEST_CODE_READ_MEDIA_AUDIO = 1;
-    private MediaPlayer mediaPlayer;
     private RecyclerView recyclerView;
 
     public DownloadedFragment() {
