@@ -19,6 +19,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class DownloadedFragment extends Fragment {
@@ -77,18 +79,28 @@ public class DownloadedFragment extends Fragment {
     }
 
     private boolean checkAndRequestPermissions() {
+        List<String> permissions = new ArrayList<>();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_MEDIA_AUDIO)
                     != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{Manifest.permission.READ_MEDIA_AUDIO}, REQUEST_CODE_READ_MEDIA_AUDIO);
-                return false;
+                permissions.add(Manifest.permission.READ_MEDIA_AUDIO);
             }
         } else {
             if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_READ_MEDIA_AUDIO);
-                return false;
+                permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
             }
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                permissions.add(Manifest.permission.POST_NOTIFICATIONS);
+            }
+        }
+
+        if (!permissions.isEmpty()) {
+            requestPermissions(permissions.toArray(new String[0]), REQUEST_CODE_READ_MEDIA_AUDIO);
+            return false;
         }
         return true;
     }
@@ -125,15 +137,21 @@ public class DownloadedFragment extends Fragment {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_CODE_READ_MEDIA_AUDIO) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted, initialize RecyclerView
+            boolean allPermissionsGranted = true;
+            for (int result : grantResults) {
+                if (result != PackageManager.PERMISSION_GRANTED) {
+                    allPermissionsGranted = false;
+                    break;
+                }
+            }
+            if (allPermissionsGranted) {
                 View view = getView();
                 if (view != null) {
                     initializeRecyclerView(view);
                 }
             } else {
                 // Permission denied, handle appropriately
-                // You can show a message to the user or disable features that require this permission
+                Toast.makeText(getContext(), "Permissions are required to proceed", Toast.LENGTH_SHORT).show();
             }
         }
     }
