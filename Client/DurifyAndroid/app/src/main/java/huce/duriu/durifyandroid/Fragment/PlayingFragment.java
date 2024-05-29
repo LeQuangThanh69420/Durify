@@ -151,7 +151,7 @@ public class PlayingFragment extends Fragment {
             }
             else if (MainActivity.audios.contains(MainActivity.currentPlay)) {
                 int i = MainActivity.audios.indexOf(MainActivity.currentPlay);
-                if (i > MainActivity.audios.size() - 1) {
+                if (i < MainActivity.audios.size() - 1) {
                     MainActivity.currentPlay = MainActivity.audios.get(i + 1);
                     try {
                         MainActivity.mediaPlayer.reset();
