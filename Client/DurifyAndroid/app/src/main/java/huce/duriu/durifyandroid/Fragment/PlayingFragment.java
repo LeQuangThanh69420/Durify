@@ -1,6 +1,7 @@
 package huce.duriu.durifyandroid.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 
@@ -21,6 +22,7 @@ import java.io.IOException;
 
 import huce.duriu.durifyandroid.Activity.MainActivity;
 import huce.duriu.durifyandroid.R;
+import huce.duriu.durifyandroid.Service.MusicService;
 
 public class PlayingFragment extends Fragment {
     private TextView titlePlaying;
@@ -89,6 +91,8 @@ public class PlayingFragment extends Fragment {
         });
 
         buttonPre.setOnClickListener(v -> {
+            Intent serviceIntent = new Intent(getActivity(), MusicService.class);
+            getActivity().startService(serviceIntent);
             if (MainActivity.musics.contains(MainActivity.currentPlay)) {
                 int i = MainActivity.musics.indexOf(MainActivity.currentPlay);
                 if (i > 0) {
@@ -124,6 +128,8 @@ public class PlayingFragment extends Fragment {
         });
 
         buttonPlay.setOnClickListener(v -> {
+            Intent serviceIntent = new Intent(getActivity(), MusicService.class);
+            getActivity().startService(serviceIntent);
             if(MainActivity.mediaPlayer.isPlaying()) {
                 MainActivity.mediaPlayer.pause();
             }
@@ -133,6 +139,8 @@ public class PlayingFragment extends Fragment {
         });
 
         buttonNext.setOnClickListener(v -> {
+            Intent serviceIntent = new Intent(getActivity(), MusicService.class);
+            getActivity().startService(serviceIntent);
             if (MainActivity.musics.contains(MainActivity.currentPlay)) {
                 int i = MainActivity.musics.indexOf(MainActivity.currentPlay);
                 if (i < MainActivity.musics.size() - 1) {
@@ -151,7 +159,7 @@ public class PlayingFragment extends Fragment {
             }
             else if (MainActivity.audios.contains(MainActivity.currentPlay)) {
                 int i = MainActivity.audios.indexOf(MainActivity.currentPlay);
-                if (i > MainActivity.audios.size() - 1) {
+                if (i < MainActivity.audios.size() - 1) {
                     MainActivity.currentPlay = MainActivity.audios.get(i + 1);
                     try {
                         MainActivity.mediaPlayer.reset();
