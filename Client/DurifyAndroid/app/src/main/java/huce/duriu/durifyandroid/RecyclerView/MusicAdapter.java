@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -73,6 +74,15 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicView> implements Fil
         });
 
         holder.getDownloadMusic().setOnClickListener(v -> {
+            File directory = new File(AudioService.path);
+            if (!directory.exists()) {
+                if (directory.mkdirs()) {
+                    Toast.makeText(holder.itemView.getContext(), "Folder created successfully", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(holder.itemView.getContext(), "An error occurred while create folder Durify", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
             String newAudioName = music.getMusicName() + ".mp3";
             String newAudioPath = AudioService.path + newAudioName;
             try {
