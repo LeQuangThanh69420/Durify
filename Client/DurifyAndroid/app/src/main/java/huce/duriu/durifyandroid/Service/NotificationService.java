@@ -144,21 +144,29 @@ public class NotificationService extends Service {
     private void showNotification(Music currentPlay) {
         PendingIntent emptyPendingIntent = PendingIntent.getActivity(this, 0, new Intent(), PendingIntent.FLAG_IMMUTABLE);
 
-        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
+        NotificationCompat.Builder notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("Now Playing")
                 .setContentText(currentPlay.getMusicName())
                 .setSmallIcon(R.drawable.logo)
                 .setContentIntent(emptyPendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_LOW)
-                .addAction(R.drawable.baseline_skip_previous_24, "Previous", getPendingIntent("ACTION_PREVIOUS"))
-                .addAction(R.drawable.baseline_pause_circle_outline_24, "Pause", getPendingIntent("ACTION_PAUSE"))
-                .addAction(R.drawable.baseline_skip_next_24, "Next", getPendingIntent("ACTION_NEXT"))
                 .setStyle(new androidx.media.app.NotificationCompat.MediaStyle()
                         .setMediaSession(mediaSession.getSessionToken())
-                        .setShowActionsInCompactView(1, 2, 3))
-                .build();
+                        .setShowActionsInCompactView(1, 2, 3));
+        if(MainActivity.mediaPlayer.isPlaying()){
+            notification
+                    .addAction(R.drawable.baseline_skip_previous_24, "Previous", getPendingIntent("ACTION_PREVIOUS"))
+                    .addAction(R.drawable.baseline_pause_circle_outline_24, "Pause", getPendingIntent("ACTION_PAUSE"))
+                    .addAction(R.drawable.baseline_skip_next_24, "Next", getPendingIntent("ACTION_NEXT"));
+        } else {
+            notification
+                    .addAction(R.drawable.baseline_skip_previous_24, "Previous", getPendingIntent("ACTION_PREVIOUS"))
+                    .addAction(R.drawable.baseline_play_circle_outline_24, "Pause", getPendingIntent("ACTION_PAUSE"))
+                    .addAction(R.drawable.baseline_skip_next_24, "Next", getPendingIntent("ACTION_NEXT"));
+        }
 
-        startForeground(1, notification);
+        Notification notification1 = notification.build();
+        startForeground(1, notification1);
     }
 
     private PendingIntent getPendingIntent(String action) {
@@ -174,5 +182,6 @@ public class NotificationService extends Service {
         if (mediaPlayer != null) {
             mediaPlayer.release();
         }
+        stopForeground(true);
     }
 }
