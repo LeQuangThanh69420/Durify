@@ -1,7 +1,6 @@
 package huce.duriu.durifyandroid.Fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 
@@ -20,11 +19,9 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 import huce.duriu.durifyandroid.Activity.MainActivity;
 import huce.duriu.durifyandroid.R;
-import huce.duriu.durifyandroid.Service.NotificationService;
 
 public class PlayingFragment extends Fragment {
     private TextView titlePlaying;
@@ -114,8 +111,6 @@ public class PlayingFragment extends Fragment {
         });
 
         buttonPre.setOnClickListener(v -> {
-            Intent serviceIntent = new Intent(getActivity(), NotificationService.class);
-            getActivity().startService(serviceIntent);
             if (MainActivity.musics.contains(MainActivity.currentPlay)) {
                 int i = MainActivity.musics.indexOf(MainActivity.currentPlay);
                 if (i > 0) {
@@ -151,8 +146,6 @@ public class PlayingFragment extends Fragment {
         });
 
         buttonPlay.setOnClickListener(v -> {
-            Intent serviceIntent = new Intent(getActivity(), NotificationService.class);
-            getActivity().startService(serviceIntent);
             if(MainActivity.mediaPlayer.isPlaying()) {
                 MainActivity.mediaPlayer.pause();
             }
@@ -162,8 +155,6 @@ public class PlayingFragment extends Fragment {
         });
 
         buttonNext.setOnClickListener(v -> {
-            Intent serviceIntent = new Intent(getActivity(), NotificationService.class);
-            getActivity().startService(serviceIntent);
             if (MainActivity.musics.contains(MainActivity.currentPlay)) {
                 int i = MainActivity.musics.indexOf(MainActivity.currentPlay);
                 if (i < MainActivity.musics.size() - 1) {
