@@ -35,7 +35,7 @@
             android:name=".Activity.MainActivity"
             android:exported="false" />
         <service
-            android:name=".Service.MusicService"
+            android:name=".Service.NotificationService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="mediaPlayback" />
