@@ -76,9 +76,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicView> implements Fil
         holder.getDownloadMusic().setOnClickListener(v -> {
             File directory = new File(AudioService.path);
             if (!directory.exists()) {
-                if (directory.mkdirs()) {
-                    Toast.makeText(holder.itemView.getContext(), "Folder created successfully", Toast.LENGTH_SHORT).show();
-                } else {
+                if (!directory.mkdirs()) {
                     Toast.makeText(holder.itemView.getContext(), "An error occurred while create folder Durify", Toast.LENGTH_SHORT).show();
                     return;
                 }
