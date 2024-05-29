@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import huce.duriu.durifyandroid.Activity.MainActivity;
@@ -64,11 +65,21 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioView> {
         });
 
         holder.getPlayAudio().setOnClickListener(v -> {
+            MainActivity.currentPlay = audio;
             MainActivity.bottomNavigationView.setSelectedItemId(R.id.playing);
+            try {
+                MainActivity.mediaPlayer.reset();
+                MainActivity.mediaPlayer.setDataSource(MainActivity.currentPlay.getMusicURL());
+                MainActivity.mediaPlayer.prepare();
+                MainActivity.mediaPlayer.start();
+            }
+            catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         });
 
         holder.getDeleteAudio().setOnClickListener(v -> {
-            String delAudioName = audio.getMusicName() + ".mp3";
+            String delAudioName = audio.getMusicName();
             String delAudioPath = AudioService.path + delAudioName;
             File fileToDelete = new File(delAudioPath);
             if (fileToDelete.exists()) {

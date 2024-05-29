@@ -27,9 +27,6 @@ import huce.duriu.durifyandroid.R;
 import huce.duriu.durifyandroid.RecyclerView.AudioAdapter;
 
 public class DownloadedFragment extends Fragment {
-
-    private static final int REQUEST_CODE_READ_MEDIA_AUDIO = 1;
-    private MediaPlayer mediaPlayer;
     private RecyclerView recyclerView;
 
     public DownloadedFragment() {
@@ -127,20 +124,6 @@ public class DownloadedFragment extends Fragment {
         return true;
     }
 
-    private void playAudio(String audioPath) {
-        if (mediaPlayer != null) {
-            mediaPlayer.release();
-        }
-        mediaPlayer = new MediaPlayer();
-        try {
-            mediaPlayer.setDataSource(audioPath);
-            mediaPlayer.prepare();
-            mediaPlayer.start();
-        } catch (Exception e) {
-            Toast.makeText(getContext(), "Cannot play audio: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -161,15 +144,6 @@ public class DownloadedFragment extends Fragment {
                 // Permission denied, handle appropriately
                 Toast.makeText(getContext(), "Permissions are required to proceed", Toast.LENGTH_SHORT).show();
             }
-        }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mediaPlayer != null) {
-            mediaPlayer.release();
-            mediaPlayer = null;
         }
     }*/
 }
