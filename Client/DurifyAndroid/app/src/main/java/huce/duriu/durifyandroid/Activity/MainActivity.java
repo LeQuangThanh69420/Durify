@@ -1,5 +1,6 @@
 package huce.duriu.durifyandroid.Activity;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -20,6 +21,7 @@ import huce.duriu.durifyandroid.Fragment.HomeFragment;
 import huce.duriu.durifyandroid.Fragment.PlayingFragment;
 import huce.duriu.durifyandroid.Model.Music;
 import huce.duriu.durifyandroid.R;
+import huce.duriu.durifyandroid.Service.NotificationService;
 
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -84,5 +86,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onDestroy();
         mediaPlayer.release();
         mediaPlayer = null;
+        stopMusicService();
+    }
+
+    private void stopMusicService() {
+        Intent serviceIntent = new Intent(this, NotificationService.class);
+        stopService(serviceIntent);
     }
 }

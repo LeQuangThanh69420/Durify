@@ -1,6 +1,7 @@
 package huce.duriu.durifyandroid.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 
@@ -22,6 +23,7 @@ import java.io.IOException;
 
 import huce.duriu.durifyandroid.Activity.MainActivity;
 import huce.duriu.durifyandroid.R;
+import huce.duriu.durifyandroid.Service.NotificationService;
 
 public class PlayingFragment extends Fragment {
     private TextView titlePlaying;
@@ -206,6 +208,9 @@ public class PlayingFragment extends Fragment {
                     if (x == 360) {
                         x = 0;
                     }
+                    Intent serviceIntent = new Intent(getActivity(), NotificationService.class);
+                    getActivity().startService(serviceIntent);
+
                     if(MainActivity.mediaPlayer != null) {
                         if(!MainActivity.currentPlay.getMusicName().equals("")) {
                             titlePlaying.setText("Now playing: " + MainActivity.currentPlay.getMusicName());
