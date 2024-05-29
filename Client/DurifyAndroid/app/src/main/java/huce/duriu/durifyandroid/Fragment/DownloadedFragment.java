@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -69,12 +70,18 @@ public class DownloadedFragment extends Fragment {
             public void afterTextChanged(Editable editable) {
                 String query = editable.toString();
                 List<Music> audios = new ArrayList<>();
-                for (Music audio : MainActivity.audios) {
-                    if (audio.getMusicName().toLowerCase().contains(query.toLowerCase())) {
-                        audios.add(audio);
+                try {
+                    for (Music audio : MainActivity.audios) {
+                        if (audio.getMusicName().toLowerCase().contains(query.toLowerCase())) {
+                            audios.add(audio);
+                        }
                     }
+                    adapter.updateList(audios);
                 }
-                adapter.updateList(audios);
+                catch (Exception e) {
+                    Toast.makeText(getContext(), "An error occurred", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         searchViewDownloaded.setOnTouchListener((v, event) -> {
@@ -94,40 +101,4 @@ public class DownloadedFragment extends Fragment {
 
         return view;
     }
-
-    //////////////////////////////////////////////////////////////////////
-    /*
-    private boolean checkAndRequestPermissions() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_MEDIA_AUDIO)
-                    != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{Manifest.permission.READ_MEDIA_AUDIO}, REQUEST_CODE_READ_MEDIA_AUDIO);
-                return false;
-            }
-        } else {
-            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_READ_MEDIA_AUDIO);
-                return false;
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_CODE_READ_MEDIA_AUDIO) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted, initialize RecyclerView
-                View view = getView();
-                if (view != null) {
-                    initializeRecyclerView(view);
-                }
-            } else {
-                // Permission denied, handle appropriately
-                // You can show a message to the user or disable features that require this permission
-            }
-        }
-    }*/
 }

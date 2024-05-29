@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.imageview.ShapeableImageView;
 import com.squareup.picasso.Picasso;
@@ -201,48 +202,53 @@ public class PlayingFragment extends Fragment {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                new Handler().postDelayed(this, 100);
-                if (x == 360) {
-                    x = 0;
+                try {
+                    new Handler().postDelayed(this, 100);
+                    if (x == 360) {
+                        x = 0;
+                    }
+                    if(MainActivity.mediaPlayer != null) {
+                        if(!MainActivity.currentPlay.getMusicName().equals("")) {
+                            titlePlaying.setText("Now playing: " + MainActivity.currentPlay.getMusicName());
+                        }
+
+                        if(!MainActivity.currentPlay.getMusicImageURL().equals("")) {
+                            Picasso.get().load(MainActivity.currentPlay.getMusicImageURL()).into(musicImage);
+                        }
+
+                        if(MainActivity.mediaPlayer.getDuration() != 0) {
+                            seekBar.setMax(MainActivity.mediaPlayer.getDuration());
+                            durationTime.setText(formatMMSS(MainActivity.mediaPlayer.getDuration()));
+                        }
+
+                        if(MainActivity.mediaPlayer.isPlaying()) {
+                            musicImage.setRotation(x++);
+                            seekBar.setProgress(MainActivity.mediaPlayer.getCurrentPosition());
+                            currentTime.setText(formatMMSS(MainActivity.mediaPlayer.getCurrentPosition()));
+                            buttonPlay.setImageResource(R.drawable.baseline_pause_circle_outline_24);
+                        }
+                        else {
+                            musicImage.setRotation(x);
+                            buttonPlay.setImageResource(R.drawable.baseline_play_circle_outline_24);
+                        }
+
+                        if(MainActivity.mediaPlayer.isLooping()) {
+                            buttonLoop.setImageResource(R.drawable.base_unloop);
+                        }
+                        else {
+                            buttonLoop.setImageResource(R.drawable.base_loop);
+                        }
+
+                        if(isMuted) {
+                            buttonVolume.setImageResource(R.drawable.baseline_volume_up_24);
+                        }
+                        else {
+                            buttonVolume.setImageResource(R.drawable.baseline_volume_off_24);
+                        }
+                    }
                 }
-                if(MainActivity.mediaPlayer != null) {
-                    if(!MainActivity.currentPlay.getMusicName().equals("")) {
-                        titlePlaying.setText("Now playing: " + MainActivity.currentPlay.getMusicName());
-                    }
-
-                    if(!MainActivity.currentPlay.getMusicImageURL().equals("")) {
-                        Picasso.get().load(MainActivity.currentPlay.getMusicImageURL()).into(musicImage);
-                    }
-
-                    if(MainActivity.mediaPlayer.getDuration() != 0) {
-                        seekBar.setMax(MainActivity.mediaPlayer.getDuration());
-                        durationTime.setText(formatMMSS(MainActivity.mediaPlayer.getDuration()));
-                    }
-
-                    if(MainActivity.mediaPlayer.isPlaying()) {
-                        musicImage.setRotation(x++);
-                        seekBar.setProgress(MainActivity.mediaPlayer.getCurrentPosition());
-                        currentTime.setText(formatMMSS(MainActivity.mediaPlayer.getCurrentPosition()));
-                        buttonPlay.setImageResource(R.drawable.baseline_pause_circle_outline_24);
-                    }
-                    else {
-                        musicImage.setRotation(x);
-                        buttonPlay.setImageResource(R.drawable.baseline_play_circle_outline_24);
-                    }
-
-                    if(MainActivity.mediaPlayer.isLooping()) {
-                        buttonLoop.setImageResource(R.drawable.base_unloop);
-                    }
-                    else {
-                        buttonLoop.setImageResource(R.drawable.base_loop);
-                    }
-
-                    if(isMuted) {
-                        buttonVolume.setImageResource(R.drawable.baseline_volume_up_24);
-                    }
-                    else {
-                        buttonVolume.setImageResource(R.drawable.baseline_volume_off_24);
-                    }
+                catch (Exception e) {
+                    Toast.makeText(getContext(), "An error occurred", Toast.LENGTH_SHORT).show();
                 }
             }
         });

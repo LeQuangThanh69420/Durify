@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,12 +67,17 @@ public class HomeFragment extends Fragment {
             public void afterTextChanged(Editable editable) {
                 String query = editable.toString();
                 List<Music> musics = new ArrayList<>();
-                for (Music music : MainActivity.musics) {
-                    if (music.getMusicName().toLowerCase().contains(query.toLowerCase())) {
-                        musics.add(music);
+                try {
+                    for (Music music : MainActivity.musics) {
+                        if (music.getMusicName().toLowerCase().contains(query.toLowerCase())) {
+                            musics.add(music);
+                        }
                     }
+                    adapter.updateList(musics);
                 }
-                adapter.updateList(musics);
+                catch (Exception e) {
+                    Toast.makeText(getContext(), "An error occurred", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         searchViewHome.setOnTouchListener((v, event) -> {
