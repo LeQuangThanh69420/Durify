@@ -86,18 +86,15 @@ public class LoadingActivity extends AppCompatActivity {
 
     private void getAudioList() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if(checkPermission()) {
-                MainActivity.audios = AudioService.fetchAudioFilesFromMusicFolder(getApplicationContext());
-            }
-            else {
-                MainActivity.audios = new ArrayList<>();
+            if(!checkPermission()) {
                 requestPermission();
             }
+            MainActivity.audios = AudioService.fetchAudioFilesFromMusicFolder(getApplicationContext());
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
-    boolean checkPermission() {
+    private boolean checkPermission() {
         int result = ContextCompat.checkSelfPermission(LoadingActivity.this, Manifest.permission.READ_MEDIA_AUDIO);
         if (result == PackageManager.PERMISSION_GRANTED) {
             return true;
@@ -109,7 +106,8 @@ public class LoadingActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     void requestPermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(LoadingActivity.this, Manifest.permission.READ_MEDIA_AUDIO)) {
-            Toast.makeText(LoadingActivity.this, "READ PERMISSION IS REQUIRED, PLEASE ALLOW FROM SETTTINGS", Toast.LENGTH_LONG).show();
+            //ActivityCompat.requestPermissions(LoadingActivity.this, new String[]{Manifest.permission.READ_MEDIA_AUDIO}, 123);
+            Toast.makeText(LoadingActivity.this, "READ_PERMISSION is REQUIRE, ALLOW from SETTTINGS", Toast.LENGTH_LONG).show();
         }
         else {
             ActivityCompat.requestPermissions(LoadingActivity.this, new String[]{Manifest.permission.READ_MEDIA_AUDIO}, 123);

@@ -11,7 +11,7 @@ import java.util.List;
 import huce.duriu.durifyandroid.Model.Music;
 
 public class AudioService {
-    public static String path = "/storage/emulated/0/Download/";
+    public static String path = "/storage/emulated/0/Download/Durify/";
     public static List<Music> fetchAudioFilesFromMusicFolder(Context context) {
         List<Music> audios = new ArrayList<>();
 
