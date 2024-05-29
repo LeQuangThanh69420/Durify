@@ -161,7 +161,7 @@ public class NotificationService extends Service {
         } else {
             notification
                     .addAction(R.drawable.baseline_skip_previous_24, "Previous", getPendingIntent("ACTION_PREVIOUS"))
-                    .addAction(R.drawable.baseline_play_circle_outline_24, "Pause", getPendingIntent("ACTION_RESUME"))
+                    .addAction(R.drawable.baseline_play_circle_outline_24, "Pause", getPendingIntent("ACTION_PAUSE"))
                     .addAction(R.drawable.baseline_skip_next_24, "Next", getPendingIntent("ACTION_NEXT"));
         }
 
@@ -182,5 +182,6 @@ public class NotificationService extends Service {
         if (mediaPlayer != null) {
             mediaPlayer.release();
         }
+        stopForeground(true);
     }
 }
