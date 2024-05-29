@@ -12,7 +12,6 @@ import android.os.IBinder;
 import android.support.v4.media.session.MediaSessionCompat;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
-import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
@@ -20,7 +19,7 @@ import huce.duriu.durifyandroid.Activity.MainActivity;
 import huce.duriu.durifyandroid.R;
 import huce.duriu.durifyandroid.Model.Music;
 
-public class MusicService extends Service {
+public class NotificationService extends Service {
     public static final String CHANNEL_ID = "MusicServiceChannel";
     private MediaPlayer mediaPlayer;
     private MediaSessionCompat mediaSession;
@@ -163,7 +162,7 @@ public class MusicService extends Service {
     }
 
     private PendingIntent getPendingIntent(String action) {
-        Intent intent = new Intent(this, MusicService.class);
+        Intent intent = new Intent(this, NotificationService.class);
         intent.setAction(action);
         return PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
     }
