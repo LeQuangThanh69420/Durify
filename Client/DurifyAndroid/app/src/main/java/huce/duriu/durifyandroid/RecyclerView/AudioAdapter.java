@@ -65,11 +65,11 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioView> {
         });
 
         holder.getPlayAudio().setOnClickListener(v -> {
+            MainActivity.currentPlay = audio;
             MainActivity.bottomNavigationView.setSelectedItemId(R.id.playing);
-
             try {
                 MainActivity.mediaPlayer.reset();
-                MainActivity.mediaPlayer.setDataSource(audio.getMusicURL());
+                MainActivity.mediaPlayer.setDataSource(MainActivity.currentPlay.getMusicURL());
                 MainActivity.mediaPlayer.prepare();
                 MainActivity.mediaPlayer.start();
             }

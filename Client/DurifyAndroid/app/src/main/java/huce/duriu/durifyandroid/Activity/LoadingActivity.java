@@ -6,10 +6,13 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -82,6 +85,34 @@ public class LoadingActivity extends AppCompatActivity {
     }
 
     private void getAudioList() {
-        MainActivity.audios = AudioService.fetchAudioFilesFromMusicFolder(getApplicationContext());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if(checkPermission()) {
+                MainActivity.audios = AudioService.fetchAudioFilesFromMusicFolder(getApplicationContext());
+            }
+            else {
+                MainActivity.audios = new ArrayList<>();
+                requestPermission();
+            }
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
+    boolean checkPermission() {
+        int result = ContextCompat.checkSelfPermission(LoadingActivity.this, Manifest.permission.READ_MEDIA_AUDIO);
+        if (result == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
+    void requestPermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(LoadingActivity.this, Manifest.permission.READ_MEDIA_AUDIO)) {
+            Toast.makeText(LoadingActivity.this, "READ PERMISSION IS REQUIRED, PLEASE ALLOW FROM SETTTINGS", Toast.LENGTH_LONG).show();
+        }
+        else {
+            ActivityCompat.requestPermissions(LoadingActivity.this, new String[]{Manifest.permission.READ_MEDIA_AUDIO}, 123);
+        }
     }
 }
