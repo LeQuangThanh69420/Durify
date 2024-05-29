@@ -18,6 +18,7 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import huce.duriu.durifyandroid.Activity.MainActivity;
 import huce.duriu.durifyandroid.R;
@@ -39,6 +40,13 @@ public class PlayingFragment extends Fragment {
 
     public PlayingFragment() {
         // Required empty public constructor
+    }
+
+    public static String formatMMSS(int time){
+        time = time / 1000;
+        int minutes = time / 60;
+        int seconds = time % 60;
+        return String.format("%02d:%02d", minutes, seconds);
     }
 
     public static PlayingFragment newInstance(String param1, String param2) {
@@ -73,14 +81,11 @@ public class PlayingFragment extends Fragment {
 
         buttonVolume.setOnClickListener(v -> {
             AudioManager audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
-
             if (audioManager != null) {
                 if (isMuted) {
-                    // Unmute
                     audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, previousVolume, 0);
                     isMuted = false;
                 } else {
-                    // Mute
                     previousVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
                     audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0, 0);
                     isMuted = true;
@@ -188,11 +193,16 @@ public class PlayingFragment extends Fragment {
                         titlePlaying.setText("Now playing: " + MainActivity.currentPlay.getMusicName());
                     }
 
+                    if(MainActivity.mediaPlayer.getDuration() != 0) {
+                        durationTime.setText(formatMMSS(MainActivity.mediaPlayer.getDuration()));
+                    }
+
                     if(!MainActivity.currentPlay.getMusicImageURL().equals("")) {
                         Picasso.get().load(MainActivity.currentPlay.getMusicImageURL()).into(musicImage);
                     }
                     if(MainActivity.mediaPlayer.isPlaying()) {
                         musicImage.setRotation(x++);
+                        currentTime.setText(formatMMSS(MainActivity.mediaPlayer.getCurrentPosition()));
                         buttonPlay.setImageResource(R.drawable.baseline_pause_circle_outline_24);
                     }
                     else {
