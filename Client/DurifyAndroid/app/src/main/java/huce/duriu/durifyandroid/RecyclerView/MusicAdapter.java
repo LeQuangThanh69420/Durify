@@ -59,11 +59,11 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicView> implements Fil
         });
 
         holder.getPlayMusic().setOnClickListener(v -> {
+            MainActivity.currentPlay = music;
             MainActivity.bottomNavigationView.setSelectedItemId(R.id.playing);
-
             try {
                 MainActivity.mediaPlayer.reset();
-                MainActivity.mediaPlayer.setDataSource(music.getMusicURL());
+                MainActivity.mediaPlayer.setDataSource(MainActivity.currentPlay.getMusicURL());
                 MainActivity.mediaPlayer.prepare();
                 MainActivity.mediaPlayer.start();
             }

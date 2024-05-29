@@ -114,22 +114,7 @@ public class DownloadedFragment extends Fragment {
         return true;
     }
 
-    private void playAudio(String audioPath) {
-        if (mediaPlayer != null) {
-            mediaPlayer.release();
-        }
-        mediaPlayer = new MediaPlayer();
-        try {
-            mediaPlayer.setDataSource(audioPath);
-            mediaPlayer.prepare();
-            mediaPlayer.start();
-        } catch (Exception e) {
-            Toast.makeText(getContext(), "Cannot play audio: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
-
     @Override
-
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_CODE_READ_MEDIA_AUDIO) {
@@ -143,15 +128,6 @@ public class DownloadedFragment extends Fragment {
                 // Permission denied, handle appropriately
                 // You can show a message to the user or disable features that require this permission
             }
-        }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mediaPlayer != null) {
-            mediaPlayer.release();
-            mediaPlayer = null;
         }
     }*/
 }

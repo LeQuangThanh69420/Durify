@@ -11,9 +11,15 @@ public class Music {
     private String musicNation;
 
     public Music() {
+        this.musicId = 0;
+        this.musicName = "";
+        this.musicURL = "";
+        this.musicImageURL = "";
+        this.musicArtist = "";
+        this.musicNation = "";
     }
-
     public Music(String musicName, String musicURL) {
+        this.musicId = 0;
         this.musicName = musicName;
         this.musicURL = musicURL;
         this.musicImageURL = "";
