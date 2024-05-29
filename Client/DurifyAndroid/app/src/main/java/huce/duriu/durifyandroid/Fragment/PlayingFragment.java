@@ -79,6 +79,23 @@ public class PlayingFragment extends Fragment {
         buttonNext = view.findViewById(R.id.buttonNext);
         buttonLoop = view.findViewById(R.id.buttonLoop);
 
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (MainActivity.mediaPlayer != null && fromUser) {
+                    MainActivity.mediaPlayer.seekTo(progress);
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+
         buttonVolume.setOnClickListener(v -> {
             AudioManager audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
             if (audioManager != null) {
@@ -193,15 +210,18 @@ public class PlayingFragment extends Fragment {
                         titlePlaying.setText("Now playing: " + MainActivity.currentPlay.getMusicName());
                     }
 
-                    if(MainActivity.mediaPlayer.getDuration() != 0) {
-                        durationTime.setText(formatMMSS(MainActivity.mediaPlayer.getDuration()));
-                    }
-
                     if(!MainActivity.currentPlay.getMusicImageURL().equals("")) {
                         Picasso.get().load(MainActivity.currentPlay.getMusicImageURL()).into(musicImage);
                     }
+
+                    if(MainActivity.mediaPlayer.getDuration() != 0) {
+                        seekBar.setMax(MainActivity.mediaPlayer.getDuration());
+                        durationTime.setText(formatMMSS(MainActivity.mediaPlayer.getDuration()));
+                    }
+
                     if(MainActivity.mediaPlayer.isPlaying()) {
                         musicImage.setRotation(x++);
+                        seekBar.setProgress(MainActivity.mediaPlayer.getCurrentPosition());
                         currentTime.setText(formatMMSS(MainActivity.mediaPlayer.getCurrentPosition()));
                         buttonPlay.setImageResource(R.drawable.baseline_pause_circle_outline_24);
                     }
