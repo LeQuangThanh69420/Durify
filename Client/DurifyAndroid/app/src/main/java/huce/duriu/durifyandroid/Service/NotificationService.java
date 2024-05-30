@@ -21,6 +21,7 @@ import androidx.core.app.NotificationCompat;
 import java.io.File;
 import java.io.IOException;
 
+import huce.duriu.durifyandroid.Activity.LoadingActivity;
 import huce.duriu.durifyandroid.Activity.MainActivity;
 import huce.duriu.durifyandroid.R;
 
@@ -127,17 +128,19 @@ public class NotificationService extends Service {
             public void onSkipToNext() {
                 super.onSkipToNext();
                 if (MainActivity.musics.contains(MainActivity.currentPlay)) {
-                    int i = MainActivity.musics.indexOf(MainActivity.currentPlay);
-                    if (i < MainActivity.musics.size() - 1) {
-                        MainActivity.currentPlay = MainActivity.musics.get(i + 1);
-                        MainActivity.mediaPlayer.reset();
-                        try {
+                    if (LoadingActivity.isNetworkConnected(getApplicationContext())) {
+                        int i = MainActivity.musics.indexOf(MainActivity.currentPlay);
+                        if (i < MainActivity.musics.size() - 1) {
+                            MainActivity.currentPlay = MainActivity.musics.get(i + 1);
                             MainActivity.mediaPlayer.reset();
-                            MainActivity.mediaPlayer.setDataSource(MainActivity.currentPlay.getMusicURL());
-                            MainActivity.mediaPlayer.prepare();
-                            MainActivity.mediaPlayer.start();
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
+                            try {
+                                MainActivity.mediaPlayer.reset();
+                                MainActivity.mediaPlayer.setDataSource(MainActivity.currentPlay.getMusicURL());
+                                MainActivity.mediaPlayer.prepare();
+                                MainActivity.mediaPlayer.start();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
                         }
                     }
                 }
@@ -171,17 +174,19 @@ public class NotificationService extends Service {
             public void onSkipToPrevious() {
                 super.onSkipToPrevious();
                 if (MainActivity.musics.contains(MainActivity.currentPlay)) {
-                    int i = MainActivity.musics.indexOf(MainActivity.currentPlay);
-                    if (i > 0) {
-                        MainActivity.currentPlay = MainActivity.musics.get(i - 1);
-                        MainActivity.mediaPlayer.reset();
-                        try {
+                    if (LoadingActivity.isNetworkConnected(getApplicationContext())) {
+                        int i = MainActivity.musics.indexOf(MainActivity.currentPlay);
+                        if (i > 0) {
+                            MainActivity.currentPlay = MainActivity.musics.get(i - 1);
                             MainActivity.mediaPlayer.reset();
-                            MainActivity.mediaPlayer.setDataSource(MainActivity.currentPlay.getMusicURL());
-                            MainActivity.mediaPlayer.prepare();
-                            MainActivity.mediaPlayer.start();
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
+                            try {
+                                MainActivity.mediaPlayer.reset();
+                                MainActivity.mediaPlayer.setDataSource(MainActivity.currentPlay.getMusicURL());
+                                MainActivity.mediaPlayer.prepare();
+                                MainActivity.mediaPlayer.start();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
                         }
                     }
                 }

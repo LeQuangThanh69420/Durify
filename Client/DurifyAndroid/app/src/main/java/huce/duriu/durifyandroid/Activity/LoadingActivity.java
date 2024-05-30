@@ -62,7 +62,7 @@ public class LoadingActivity extends AppCompatActivity {
     }
 
     private void getMusicList() {
-        if (isNetworkConnected()) {
+        if (isNetworkConnected(this)) {
             ApiService apiService = Retrofit.getInstance().create(ApiService.class);
             Call<List<Music>> call = apiService.getMusicList();
             call.enqueue(new Callback<List<Music>>() {
@@ -82,8 +82,8 @@ public class LoadingActivity extends AppCompatActivity {
         }
     }
 
-    private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+    public static boolean isNetworkConnected(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (cm != null) {
             NetworkInfo activeNetworkInfo = cm.getActiveNetworkInfo();
             return activeNetworkInfo != null && activeNetworkInfo.isConnected();
@@ -126,8 +126,6 @@ public class LoadingActivity extends AppCompatActivity {
         if (requestCode == PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 getAudioList();
-            } else {
-                Toast.makeText(this, "Permission Denied. Cannot access audio files.", Toast.LENGTH_SHORT).show();
             }
         }
     }

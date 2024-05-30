@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import huce.duriu.durifyandroid.Activity.LoadingActivity;
 import huce.duriu.durifyandroid.Activity.MainActivity;
 import huce.duriu.durifyandroid.Service.AudioService;
 import huce.duriu.durifyandroid.File.FileDownloadTask;
@@ -60,16 +61,21 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicView> implements Fil
         });
 
         holder.getPlayMusic().setOnClickListener(v -> {
-            MainActivity.currentPlay = music;
-            MainActivity.bottomNavigationView.setSelectedItemId(R.id.playing);
-            try {
-                MainActivity.mediaPlayer.reset();
-                MainActivity.mediaPlayer.setDataSource(MainActivity.currentPlay.getMusicURL());
-                MainActivity.mediaPlayer.prepare();
-                MainActivity.mediaPlayer.start();
+            if (LoadingActivity.isNetworkConnected(holder.itemView.getContext())) {
+                MainActivity.currentPlay = music;
+                MainActivity.bottomNavigationView.setSelectedItemId(R.id.playing);
+                try {
+                    MainActivity.mediaPlayer.reset();
+                    MainActivity.mediaPlayer.setDataSource(MainActivity.currentPlay.getMusicURL());
+                    MainActivity.mediaPlayer.prepare();
+                    MainActivity.mediaPlayer.start();
+                }
+                catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
-            catch (IOException e) {
-                throw new RuntimeException(e);
+            else {
+                Toast.makeText(holder.itemView.getContext(), "No internet connection", Toast.LENGTH_SHORT).show();
             }
         });
 

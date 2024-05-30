@@ -25,6 +25,7 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 import java.io.IOException;
 
+import huce.duriu.durifyandroid.Activity.LoadingActivity;
 import huce.duriu.durifyandroid.Activity.MainActivity;
 import huce.duriu.durifyandroid.R;
 import huce.duriu.durifyandroid.Service.NotificationService;
@@ -122,19 +123,24 @@ public class PlayingFragment extends Fragment {
 
         buttonPre.setOnClickListener(v -> {
             if (MainActivity.musics.contains(MainActivity.currentPlay)) {
-                int i = MainActivity.musics.indexOf(MainActivity.currentPlay);
-                if (i > 0) {
-                    MainActivity.currentPlay = MainActivity.musics.get(i - 1);
-                    MainActivity.mediaPlayer.reset();
-                    try {
+                if (LoadingActivity.isNetworkConnected(v.getContext())) {
+                    int i = MainActivity.musics.indexOf(MainActivity.currentPlay);
+                    if (i > 0) {
+                        MainActivity.currentPlay = MainActivity.musics.get(i - 1);
                         MainActivity.mediaPlayer.reset();
-                        MainActivity.mediaPlayer.setDataSource(MainActivity.currentPlay.getMusicURL());
-                        MainActivity.mediaPlayer.prepare();
-                        MainActivity.mediaPlayer.start();
+                        try {
+                            MainActivity.mediaPlayer.reset();
+                            MainActivity.mediaPlayer.setDataSource(MainActivity.currentPlay.getMusicURL());
+                            MainActivity.mediaPlayer.prepare();
+                            MainActivity.mediaPlayer.start();
+                        }
+                        catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
-                    catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+                }
+                else {
+                    Toast.makeText(v.getContext(), "No internet connection", Toast.LENGTH_SHORT).show();
                 }
             }
             else if (MainActivity.audios.contains(MainActivity.currentPlay)) {
@@ -176,19 +182,24 @@ public class PlayingFragment extends Fragment {
 
         buttonNext.setOnClickListener(v -> {
             if (MainActivity.musics.contains(MainActivity.currentPlay)) {
-                int i = MainActivity.musics.indexOf(MainActivity.currentPlay);
-                if (i < MainActivity.musics.size() - 1) {
-                    MainActivity.currentPlay = MainActivity.musics.get(i + 1);
-                    MainActivity.mediaPlayer.reset();
-                    try {
+                if (LoadingActivity.isNetworkConnected(v.getContext())) {
+                    int i = MainActivity.musics.indexOf(MainActivity.currentPlay);
+                    if (i < MainActivity.musics.size() - 1) {
+                        MainActivity.currentPlay = MainActivity.musics.get(i + 1);
                         MainActivity.mediaPlayer.reset();
-                        MainActivity.mediaPlayer.setDataSource(MainActivity.currentPlay.getMusicURL());
-                        MainActivity.mediaPlayer.prepare();
-                        MainActivity.mediaPlayer.start();
+                        try {
+                            MainActivity.mediaPlayer.reset();
+                            MainActivity.mediaPlayer.setDataSource(MainActivity.currentPlay.getMusicURL());
+                            MainActivity.mediaPlayer.prepare();
+                            MainActivity.mediaPlayer.start();
+                        }
+                        catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
-                    catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+                }
+                else {
+                    Toast.makeText(v.getContext(), "No internet connection", Toast.LENGTH_SHORT).show();
                 }
             }
             else if (MainActivity.audios.contains(MainActivity.currentPlay)) {
