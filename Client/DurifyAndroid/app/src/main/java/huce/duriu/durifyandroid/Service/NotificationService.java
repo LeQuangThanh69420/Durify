@@ -1,5 +1,6 @@
 package huce.duriu.durifyandroid.Service;
 
+import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -12,10 +13,12 @@ import android.os.IBinder;
 import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
+import java.io.File;
 import java.io.IOException;
 
 import huce.duriu.durifyandroid.Activity.MainActivity;
@@ -137,17 +140,24 @@ public class NotificationService extends Service {
                             throw new RuntimeException(e);
                         }
                     }
-                } else if (MainActivity.audios.contains(MainActivity.currentPlay)) {
+                }
+                else if (MainActivity.audios.contains(MainActivity.currentPlay)) {
                     int i = MainActivity.audios.indexOf(MainActivity.currentPlay);
                     if (i < MainActivity.audios.size() - 1) {
-                        MainActivity.currentPlay = MainActivity.audios.get(i + 1);
-                        try {
-                            MainActivity.mediaPlayer.reset();
-                            MainActivity.mediaPlayer.setDataSource(MainActivity.currentPlay.getMusicURL());
-                            MainActivity.mediaPlayer.prepare();
-                            MainActivity.mediaPlayer.start();
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
+                        File file = new File(MainActivity.audios.get(i + 1).getMusicURL());
+                        if (file.exists()) {
+                            MainActivity.currentPlay = MainActivity.audios.get(i + 1);
+                            try {
+                                MainActivity.mediaPlayer.reset();
+                                MainActivity.mediaPlayer.setDataSource(MainActivity.currentPlay.getMusicURL());
+                                MainActivity.mediaPlayer.prepare();
+                                MainActivity.mediaPlayer.start();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                        else {
+                            MainActivity.audios.remove(MainActivity.audios.get(i + 1));
                         }
                     }
                 }
@@ -174,17 +184,24 @@ public class NotificationService extends Service {
                             throw new RuntimeException(e);
                         }
                     }
-                } else if (MainActivity.audios.contains(MainActivity.currentPlay)) {
+                }
+                else if (MainActivity.audios.contains(MainActivity.currentPlay)) {
                     int i = MainActivity.audios.indexOf(MainActivity.currentPlay);
                     if (i > 0) {
+                        File file = new File(MainActivity.audios.get(i - 1).getMusicURL());
+                        if (file.exists()) {
                         MainActivity.currentPlay = MainActivity.audios.get(i - 1);
-                        try {
-                            MainActivity.mediaPlayer.reset();
-                            MainActivity.mediaPlayer.setDataSource(MainActivity.currentPlay.getMusicURL());
-                            MainActivity.mediaPlayer.prepare();
-                            MainActivity.mediaPlayer.start();
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
+                            try {
+                                MainActivity.mediaPlayer.reset();
+                                MainActivity.mediaPlayer.setDataSource(MainActivity.currentPlay.getMusicURL());
+                                MainActivity.mediaPlayer.prepare();
+                                MainActivity.mediaPlayer.start();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                        else {
+                            MainActivity.audios.remove(MainActivity.audios.get(i - 1));
                         }
                     }
                 }

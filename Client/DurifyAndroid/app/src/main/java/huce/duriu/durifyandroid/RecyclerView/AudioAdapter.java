@@ -65,16 +65,26 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioView> {
         });
 
         holder.getPlayAudio().setOnClickListener(v -> {
-            MainActivity.currentPlay = audio;
-            MainActivity.bottomNavigationView.setSelectedItemId(R.id.playing);
-            try {
-                MainActivity.mediaPlayer.reset();
-                MainActivity.mediaPlayer.setDataSource(MainActivity.currentPlay.getMusicURL());
-                MainActivity.mediaPlayer.prepare();
-                MainActivity.mediaPlayer.start();
+            File file = new File(audio.getMusicURL());
+            if (file.exists()) {
+                MainActivity.currentPlay = audio;
+                MainActivity.bottomNavigationView.setSelectedItemId(R.id.playing);
+                try {
+                    MainActivity.mediaPlayer.reset();
+                    MainActivity.mediaPlayer.setDataSource(MainActivity.currentPlay.getMusicURL());
+                    MainActivity.mediaPlayer.prepare();
+                    MainActivity.mediaPlayer.start();
+                }
+                catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
-            catch (IOException e) {
-                throw new RuntimeException(e);
+            else {
+                audios.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, audios.size());
+                MainActivity.audios.remove(position);
+                Toast.makeText(v.getContext(), "Failed to open file, remove it from list", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -91,7 +101,7 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioView> {
                         MainActivity.audios.remove(position);
                         Toast.makeText(v.getContext(), "Deleted " + delAudioName + " successfully", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(v.getContext(), "Failed to delete file", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(v.getContext(), "Failed to delete because DON'T HAVE PERMISSION", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(v.getContext(), "File not found", Toast.LENGTH_SHORT).show();

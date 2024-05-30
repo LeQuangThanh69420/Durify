@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.io.IOException;
 
 import huce.duriu.durifyandroid.Activity.MainActivity;
@@ -139,17 +140,23 @@ public class PlayingFragment extends Fragment {
             else if (MainActivity.audios.contains(MainActivity.currentPlay)) {
                 int i = MainActivity.audios.indexOf(MainActivity.currentPlay);
                 if (i > 0) {
-                    MainActivity.currentPlay = MainActivity.audios.get(i - 1);
-                    try {
-                        MainActivity.mediaPlayer.reset();
-                        MainActivity.mediaPlayer.setDataSource(MainActivity.currentPlay.getMusicURL());
-                        MainActivity.mediaPlayer.prepare();
-                        MainActivity.mediaPlayer.start();
+                    File file = new File(MainActivity.audios.get(i - 1).getMusicURL());
+                    if (file.exists()) {
+                        MainActivity.currentPlay = MainActivity.audios.get(i - 1);
+                        try {
+                            MainActivity.mediaPlayer.reset();
+                            MainActivity.mediaPlayer.setDataSource(MainActivity.currentPlay.getMusicURL());
+                            MainActivity.mediaPlayer.prepare();
+                            MainActivity.mediaPlayer.start();
+                        }
+                        catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
-                    catch (IOException e) {
-                        throw new RuntimeException(e);
+                    else {
+                        MainActivity.audios.remove(MainActivity.audios.get(i - 1));
+                        Toast.makeText(v.getContext(), "Failed to open file, remove it from list", Toast.LENGTH_SHORT).show();
                     }
-
                 }
             }
             if (MainActivity.mediaPlayer.isPlaying() || MainActivity.mediaPlayer != null) {
@@ -187,17 +194,23 @@ public class PlayingFragment extends Fragment {
             else if (MainActivity.audios.contains(MainActivity.currentPlay)) {
                 int i = MainActivity.audios.indexOf(MainActivity.currentPlay);
                 if (i < MainActivity.audios.size() - 1) {
-                    MainActivity.currentPlay = MainActivity.audios.get(i + 1);
-                    try {
-                        MainActivity.mediaPlayer.reset();
-                        MainActivity.mediaPlayer.setDataSource(MainActivity.currentPlay.getMusicURL());
-                        MainActivity.mediaPlayer.prepare();
-                        MainActivity.mediaPlayer.start();
+                    File file = new File(MainActivity.audios.get(i + 1).getMusicURL());
+                    if (file.exists()) {
+                        MainActivity.currentPlay = MainActivity.audios.get(i + 1);
+                        try {
+                            MainActivity.mediaPlayer.reset();
+                            MainActivity.mediaPlayer.setDataSource(MainActivity.currentPlay.getMusicURL());
+                            MainActivity.mediaPlayer.prepare();
+                            MainActivity.mediaPlayer.start();
+                        }
+                        catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
-                    catch (IOException e) {
-                        throw new RuntimeException(e);
+                    else {
+                        MainActivity.audios.remove(MainActivity.audios.get(i + 1));
+                        Toast.makeText(v.getContext(), "Failed to open file, remove it from list", Toast.LENGTH_SHORT).show();
                     }
-
                 }
             }
             if (MainActivity.mediaPlayer.isPlaying() || MainActivity.mediaPlayer != null) {
