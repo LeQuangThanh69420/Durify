@@ -6,8 +6,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.media.MediaMetadata;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -15,13 +13,11 @@ import android.os.IBinder;
 import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
-import android.widget.RemoteViews;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 import java.io.IOException;
-import java.net.URL;
 
 import huce.duriu.durifyandroid.Activity.MainActivity;
 import huce.duriu.durifyandroid.R;
@@ -44,7 +40,7 @@ public class NotificationService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         String action = intent.getAction();
         if (MainActivity.currentPlay != null) {
-            showNotification(MainActivity.currentPlay);
+            showNotification();
         }
         return START_NOT_STICKY;
     }
@@ -69,7 +65,7 @@ public class NotificationService extends Service {
         }
     }
 
-    private void showNotification(Music currentPlay) {
+    private void showNotification() {
         PendingIntent emptyPendingIntent = PendingIntent.getActivity(this, 0, new Intent(), PendingIntent.FLAG_IMMUTABLE);
 
         if (MainActivity.mediaPlayer.getDuration() != 0) {
@@ -88,6 +84,19 @@ public class NotificationService extends Service {
                                 PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS)
                         .build()
         );
+
+        NotificationCompat.Builder notification = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setContentTitle(MainActivity.currentPlay.getMusicName())
+                .setContentText(MainActivity.currentPlay.getMusicArtist())
+                .setSmallIcon(R.drawable.logo)
+                .setContentIntent(emptyPendingIntent)
+                .setPriority(NotificationCompat.PRIORITY_LOW)
+                .setStyle(new androidx.media.app.NotificationCompat.MediaStyle()
+                        .setMediaSession(mediaSession.getSessionToken())
+                        .setShowActionsInCompactView(1));
+
+        Notification notification1 = notification.build();
+        startForeground(1, notification1);
 
         mediaSession.setCallback(new MediaSessionCompat.Callback() {
             // Implement callbacks
@@ -189,26 +198,6 @@ public class NotificationService extends Service {
             }
         });
 
-        Bitmap image = null;
-        try {
-            URL url = new URL(currentPlay.getMusicImageURL());
-            image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-        NotificationCompat.Builder notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle("Now Playing")
-                .setContentText(currentPlay.getMusicName())
-                .setSmallIcon(R.drawable.logo)
-                .setLargeIcon(image)
-                .setContentIntent(emptyPendingIntent)
-                .setPriority(NotificationCompat.PRIORITY_LOW)
-                .setStyle(new androidx.media.app.NotificationCompat.MediaStyle()
-                        .setMediaSession(mediaSession.getSessionToken())
-                        .setShowActionsInCompactView(1));
-
-        Notification notification1 = notification.build();
-        startForeground(1, notification1);
     }
 
     @Override
