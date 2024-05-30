@@ -79,7 +79,7 @@ public class DownloadedFragment extends Fragment {
                     adapter.updateList(audios);
                 }
                 catch (Exception e) {
-                    Toast.makeText(getContext(), "An error occurred", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), "An error occurred", Toast.LENGTH_SHORT).show();
                 }
 
             }
