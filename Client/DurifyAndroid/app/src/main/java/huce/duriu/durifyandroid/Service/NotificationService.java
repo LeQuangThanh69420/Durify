@@ -80,7 +80,8 @@ public class NotificationService extends Service {
                             .setActions(PlaybackStateCompat.ACTION_PAUSE |
                                     PlaybackStateCompat.ACTION_PLAY |
                                     PlaybackStateCompat.ACTION_SKIP_TO_NEXT |
-                                    PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS)
+                                    PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS |
+                                    PlaybackStateCompat.ACTION_SEEK_TO )
                             .build()
         );
 
@@ -92,7 +93,7 @@ public class NotificationService extends Service {
                 .setPriority(NotificationCompat.PRIORITY_LOW)
                 .setStyle(new androidx.media.app.NotificationCompat.MediaStyle()
                         .setMediaSession(mediaSession.getSessionToken())
-                        .setShowActionsInCompactView(1));
+                        .setShowActionsInCompactView(1, 2, 3, 4, 5, 6, 7, 8));
 
         Notification notification1 = notification.build();
         startForeground(1, notification1);
@@ -218,7 +219,9 @@ public class NotificationService extends Service {
 
             @Override
             public void onSeekTo(long pos) {
-                // your seek() implements
+                if (MainActivity.mediaPlayer != null) {
+                    MainActivity.mediaPlayer.seekTo(Math.toIntExact(pos));
+                }
             }
         });
 

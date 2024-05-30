@@ -35,6 +35,7 @@ import retrofit2.Response;
 
 public class LoadingActivity extends AppCompatActivity {
     private int PERMISSION_REQUEST_CODE = 123;
+    private int MANAGE_PERMISSION_REQUEST_CODE = 234;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +96,9 @@ public class LoadingActivity extends AppCompatActivity {
             if(!checkPermission()) {
                 requestPermission();
             }
+            if(!checkMETpermission()) {
+                requestMETpermission();
+            }
             MainActivity.audios = AudioService.fetchAudioFilesFromMusicFolder(getApplicationContext());
         }
     }
@@ -119,12 +123,37 @@ public class LoadingActivity extends AppCompatActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
+    private boolean checkMETpermission() {
+        int result = ContextCompat.checkSelfPermission(LoadingActivity.this, Manifest.permission.MANAGE_EXTERNAL_STORAGE);
+        if (result == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
+    void requestMETpermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(LoadingActivity.this, Manifest.permission.MANAGE_EXTERNAL_STORAGE)) {
+            Toast.makeText(LoadingActivity.this, "MANAGE PERMISSION is REQUIRE, ALLOW from SETTTINGS", Toast.LENGTH_LONG).show();
+        }
+        else {
+            ActivityCompat.requestPermissions(LoadingActivity.this, new String[]{Manifest.permission.MANAGE_EXTERNAL_STORAGE}, MANAGE_PERMISSION_REQUEST_CODE);
+        }
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 getAudioList();
+            }
+        }
+        if (requestCode == MANAGE_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
             }
         }
     }
