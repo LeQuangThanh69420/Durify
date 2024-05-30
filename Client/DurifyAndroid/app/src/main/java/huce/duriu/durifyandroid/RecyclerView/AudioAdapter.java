@@ -101,7 +101,7 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioView> {
                         MainActivity.audios.remove(position);
                         Toast.makeText(v.getContext(), "Deleted " + delAudioName + " successfully", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(v.getContext(), "Failed to delete because DON'T HAVE PERMISSION", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(v.getContext(), "Application DON'T HAVE PERMISSION on this file", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(v.getContext(), "File not found", Toast.LENGTH_SHORT).show();

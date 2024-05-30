@@ -90,21 +90,25 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicView> implements Fil
             String newAudioName = music.getMusicName() + ".mp3";
             String newAudioPath = AudioService.path + newAudioName;
             try {
-                Music newAudio = new Music(newAudioName, newAudioPath);
-                if (!MainActivity.audios.contains(newAudio)) {
-                    FileDownloadTask downloadTask = new FileDownloadTask(newAudioPath, this);
-                    downloadTask.execute(music.getMusicURL());
-                    MainActivity.audios.add(0, newAudio);
-                    Toast.makeText(holder.itemView.getContext(), "Download " + newAudioName + " successfully", Toast.LENGTH_SHORT).show();
+                if (LoadingActivity.isNetworkConnected(holder.itemView.getContext())) {
+                    Music newAudio = new Music(newAudioName, newAudioPath);
+                    if (!MainActivity.audios.contains(newAudio)) {
+                        FileDownloadTask downloadTask = new FileDownloadTask(newAudioPath, this);
+                        downloadTask.execute(music.getMusicURL());
+                        MainActivity.audios.add(0, newAudio);
+                        Toast.makeText(holder.itemView.getContext(), "Download " + newAudioName + " successfully", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(holder.itemView.getContext(), "This music is already downloaded", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else {
-                    Toast.makeText(holder.itemView.getContext(), "This music is already downloaded", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(holder.itemView.getContext(), "No internet connection", Toast.LENGTH_SHORT).show();
                 }
             }
             catch (Exception e) {
                 Toast.makeText(holder.itemView.getContext(), "An error occurred", Toast.LENGTH_SHORT).show();
             }
-
         });
     }
 
