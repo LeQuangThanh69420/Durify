@@ -85,10 +85,11 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioView> {
                 File fileToDelete = new File(delAudioPath);
                 if (fileToDelete.exists()) {
                     if (fileToDelete.delete()) {
-                        Toast.makeText(v.getContext(), "Deleted " + delAudioName + " successfully", Toast.LENGTH_SHORT).show();
                         audios.remove(position);
                         notifyItemRemoved(position);
                         notifyItemRangeChanged(position, audios.size());
+                        MainActivity.audios.remove(position);
+                        Toast.makeText(v.getContext(), "Deleted " + delAudioName + " successfully", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(v.getContext(), "Failed to delete file", Toast.LENGTH_SHORT).show();
                     }

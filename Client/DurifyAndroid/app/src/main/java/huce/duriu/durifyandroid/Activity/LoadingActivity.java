@@ -113,7 +113,6 @@ public class LoadingActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     void requestPermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(LoadingActivity.this, Manifest.permission.READ_MEDIA_AUDIO)) {
-            //ActivityCompat.requestPermissions(LoadingActivity.this, new String[]{Manifest.permission.READ_MEDIA_AUDIO}, 123);
             Toast.makeText(LoadingActivity.this, "READ PERMISSION is REQUIRE, ALLOW from SETTTINGS", Toast.LENGTH_LONG).show();
         }
         else {
