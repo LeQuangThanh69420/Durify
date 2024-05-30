@@ -28,7 +28,7 @@ import huce.duriu.durifyandroid.Service.NotificationService;
 public class PlayingFragment extends Fragment {
     private TextView titlePlaying;
     private ShapeableImageView musicImage;
-    private int x = 0;
+    private float x = 0f;
     private boolean isMuted = false;
     private int previousVolume;
     private SeekBar seekBar;
@@ -204,12 +204,10 @@ public class PlayingFragment extends Fragment {
             @Override
             public void run() {
                 try {
-                    new Handler().postDelayed(this, 100);
+                    new Handler().postDelayed(this, 300);
                     if (x == 360) {
                         x = 0;
                     }
-                    Intent serviceIntent = new Intent(getActivity(), NotificationService.class);
-                    getActivity().startService(serviceIntent);
 
                     if(MainActivity.mediaPlayer != null) {
                         if(!MainActivity.currentPlay.getMusicName().equals("")) {
@@ -220,15 +218,14 @@ public class PlayingFragment extends Fragment {
                             Picasso.get().load(MainActivity.currentPlay.getMusicImageURL()).into(musicImage);
                         }
 
-                        if(MainActivity.mediaPlayer.getDuration() != 0) {
-                            seekBar.setMax(MainActivity.mediaPlayer.getDuration());
-                            durationTime.setText(formatMMSS(MainActivity.mediaPlayer.getDuration()));
-                        }
-
                         if(MainActivity.mediaPlayer.isPlaying()) {
-                            musicImage.setRotation(x++);
+                            musicImage.setRotation(x=x+0.5f);
                             seekBar.setProgress(MainActivity.mediaPlayer.getCurrentPosition());
                             currentTime.setText(formatMMSS(MainActivity.mediaPlayer.getCurrentPosition()));
+                            seekBar.setMax(MainActivity.mediaPlayer.getDuration());
+                            durationTime.setText(formatMMSS(MainActivity.mediaPlayer.getDuration()));
+                            Intent serviceIntent = new Intent(view.getContext(), NotificationService.class);
+                            view.getContext().startService(serviceIntent);
                             buttonPlay.setImageResource(R.drawable.baseline_pause_circle_outline_24);
                         }
                         else {
@@ -252,7 +249,8 @@ public class PlayingFragment extends Fragment {
                     }
                 }
                 catch (Exception e) {
-                    Toast.makeText(getContext(), "An error occurred", Toast.LENGTH_SHORT).show();
+                    System.out.println(e);
+                    Toast.makeText(view.getContext(), "An error occurred", Toast.LENGTH_SHORT).show();
                 }
             }
         });

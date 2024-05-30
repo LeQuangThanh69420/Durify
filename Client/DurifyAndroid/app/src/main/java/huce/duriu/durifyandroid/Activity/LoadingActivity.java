@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -33,7 +34,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoadingActivity extends AppCompatActivity {
-
+    private int PERMISSION_REQUEST_CODE = 123;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,8 +46,14 @@ public class LoadingActivity extends AppCompatActivity {
             return insets;
         });
 
-        this.getMusicList();
-        this.getAudioList();
+        try {
+            this.getMusicList();
+            this.getAudioList();
+        }
+        catch (Exception e) {
+
+        }
+
 
         new Handler().postDelayed(() -> {
             startActivity(new Intent(LoadingActivity.this, MainActivity.class));
@@ -107,10 +114,22 @@ public class LoadingActivity extends AppCompatActivity {
     void requestPermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(LoadingActivity.this, Manifest.permission.READ_MEDIA_AUDIO)) {
             //ActivityCompat.requestPermissions(LoadingActivity.this, new String[]{Manifest.permission.READ_MEDIA_AUDIO}, 123);
-            Toast.makeText(LoadingActivity.this, "READ_PERMISSION is REQUIRE, ALLOW from SETTTINGS", Toast.LENGTH_LONG).show();
+            Toast.makeText(LoadingActivity.this, "READ PERMISSION is REQUIRE, ALLOW from SETTTINGS", Toast.LENGTH_LONG).show();
         }
         else {
-            ActivityCompat.requestPermissions(LoadingActivity.this, new String[]{Manifest.permission.READ_MEDIA_AUDIO}, 123);
+            ActivityCompat.requestPermissions(LoadingActivity.this, new String[]{Manifest.permission.READ_MEDIA_AUDIO}, PERMISSION_REQUEST_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getAudioList();
+            } else {
+                Toast.makeText(this, "Permission Denied. Cannot access audio files.", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

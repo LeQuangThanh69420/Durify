@@ -6,6 +6,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaMetadata;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -13,11 +15,13 @@ import android.os.IBinder;
 import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
+import android.widget.RemoteViews;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 import java.io.IOException;
+import java.net.URL;
 
 import huce.duriu.durifyandroid.Activity.MainActivity;
 import huce.duriu.durifyandroid.R;
@@ -68,17 +72,18 @@ public class NotificationService extends Service {
     private void showNotification(Music currentPlay) {
         PendingIntent emptyPendingIntent = PendingIntent.getActivity(this, 0, new Intent(), PendingIntent.FLAG_IMMUTABLE);
 
-        mediaSession.setMetadata(
-                new  MediaMetadataCompat.Builder()
-                        .putLong(MediaMetadata.METADATA_KEY_DURATION, MainActivity.mediaPlayer.getDuration())
-                        .build()
-        );
-
+        if (MainActivity.mediaPlayer.getDuration() != 0) {
+            mediaSession.setMetadata(
+                    new MediaMetadataCompat.Builder()
+                            .putLong(MediaMetadata.METADATA_KEY_DURATION, MainActivity.mediaPlayer.getDuration())
+                            .build()
+            );
+        }
         mediaSession.setPlaybackState(
                 new PlaybackStateCompat.Builder()
                         .setState(PlaybackStateCompat.STATE_PLAYING, MainActivity.mediaPlayer.getCurrentPosition(), 0f)
-                        .setActions( PlaybackStateCompat.ACTION_PLAY |
-                                PlaybackStateCompat.ACTION_PAUSE |
+                        .setActions(PlaybackStateCompat.ACTION_PAUSE |
+                                PlaybackStateCompat.ACTION_PLAY |
                                 PlaybackStateCompat.ACTION_SKIP_TO_NEXT |
                                 PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS)
                         .build()
@@ -124,13 +129,11 @@ public class NotificationService extends Service {
                             MainActivity.mediaPlayer.setDataSource(MainActivity.currentPlay.getMusicURL());
                             MainActivity.mediaPlayer.prepare();
                             MainActivity.mediaPlayer.start();
-                        }
-                        catch (IOException e) {
+                        } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
                     }
-                }
-                else if (MainActivity.audios.contains(MainActivity.currentPlay)) {
+                } else if (MainActivity.audios.contains(MainActivity.currentPlay)) {
                     int i = MainActivity.audios.indexOf(MainActivity.currentPlay);
                     if (i < MainActivity.audios.size() - 1) {
                         MainActivity.currentPlay = MainActivity.audios.get(i + 1);
@@ -139,8 +142,7 @@ public class NotificationService extends Service {
                             MainActivity.mediaPlayer.setDataSource(MainActivity.currentPlay.getMusicURL());
                             MainActivity.mediaPlayer.prepare();
                             MainActivity.mediaPlayer.start();
-                        }
-                        catch (IOException e) {
+                        } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
 
@@ -161,13 +163,11 @@ public class NotificationService extends Service {
                             MainActivity.mediaPlayer.setDataSource(MainActivity.currentPlay.getMusicURL());
                             MainActivity.mediaPlayer.prepare();
                             MainActivity.mediaPlayer.start();
-                        }
-                        catch (IOException e) {
+                        } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
                     }
-                }
-                else if (MainActivity.audios.contains(MainActivity.currentPlay)) {
+                } else if (MainActivity.audios.contains(MainActivity.currentPlay)) {
                     int i = MainActivity.audios.indexOf(MainActivity.currentPlay);
                     if (i > 0) {
                         MainActivity.currentPlay = MainActivity.audios.get(i - 1);
@@ -176,8 +176,7 @@ public class NotificationService extends Service {
                             MainActivity.mediaPlayer.setDataSource(MainActivity.currentPlay.getMusicURL());
                             MainActivity.mediaPlayer.prepare();
                             MainActivity.mediaPlayer.start();
-                        }
-                        catch (IOException e) {
+                        } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
                     }
@@ -190,10 +189,18 @@ public class NotificationService extends Service {
             }
         });
 
+        Bitmap image = null;
+        try {
+            URL url = new URL(currentPlay.getMusicImageURL());
+            image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+        } catch (IOException e) {
+            System.out.println(e);
+        }
         NotificationCompat.Builder notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("Now Playing")
                 .setContentText(currentPlay.getMusicName())
                 .setSmallIcon(R.drawable.logo)
+                .setLargeIcon(image)
                 .setContentIntent(emptyPendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_LOW)
                 .setStyle(new androidx.media.app.NotificationCompat.MediaStyle()
