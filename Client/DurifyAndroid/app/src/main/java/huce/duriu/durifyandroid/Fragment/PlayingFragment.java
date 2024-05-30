@@ -3,11 +3,14 @@ package huce.duriu.durifyandroid.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.media.MediaMetadata;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
+import android.support.v4.media.MediaMetadataCompat;
+import android.support.v4.media.session.PlaybackStateCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,13 +66,17 @@ public class PlayingFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_playing, container, false);
-
+        if (MainActivity.mediaPlayer.isPlaying() || MainActivity.mediaPlayer != null) {
+            Intent serviceIntent = new Intent(view.getContext(), NotificationService.class);
+            view.getContext().startService(serviceIntent);
+        }
         titlePlaying = view.findViewById(R.id.TitlePlaying);
         musicImage = view.findViewById(R.id.MusicImage);
         seekBar = view.findViewById(R.id.seekBar);
@@ -145,6 +152,10 @@ public class PlayingFragment extends Fragment {
 
                 }
             }
+            if (MainActivity.mediaPlayer.isPlaying() || MainActivity.mediaPlayer != null) {
+                Intent serviceIntent = new Intent(view.getContext(), NotificationService.class);
+                view.getContext().startService(serviceIntent);
+            }
         });
 
         buttonPlay.setOnClickListener(v -> {
@@ -189,6 +200,10 @@ public class PlayingFragment extends Fragment {
 
                 }
             }
+            if (MainActivity.mediaPlayer.isPlaying() || MainActivity.mediaPlayer != null) {
+                Intent serviceIntent = new Intent(view.getContext(), NotificationService.class);
+                view.getContext().startService(serviceIntent);
+            }
         });
 
         buttonLoop.setOnClickListener(v -> {
@@ -204,7 +219,7 @@ public class PlayingFragment extends Fragment {
             @Override
             public void run() {
                 try {
-                    new Handler().postDelayed(this, 300);
+                    new Handler().postDelayed(this, 100);
                     if (x == 360) {
                         x = 0;
                     }
@@ -219,16 +234,41 @@ public class PlayingFragment extends Fragment {
                         }
 
                         if(MainActivity.mediaPlayer.isPlaying()) {
-                            musicImage.setRotation(x=x+0.5f);
+                            if (NotificationService.mediaSession != null) {
+                                NotificationService.mediaSession.setMetadata(
+                                        new MediaMetadataCompat.Builder()
+                                                .putLong(MediaMetadata.METADATA_KEY_DURATION, MainActivity.mediaPlayer.getDuration())
+                                                .build()
+                                );
+                                NotificationService.mediaSession.setPlaybackState(
+                                        new PlaybackStateCompat.Builder()
+                                                .setState(PlaybackStateCompat.STATE_PLAYING, MainActivity.mediaPlayer.getCurrentPosition(), 0f)
+                                                .setActions(PlaybackStateCompat.ACTION_PAUSE |
+                                                        PlaybackStateCompat.ACTION_PLAY |
+                                                        PlaybackStateCompat.ACTION_SKIP_TO_NEXT |
+                                                        PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS)
+                                                .build()
+                                );
+                            }
+                            musicImage.setRotation(x++);
                             seekBar.setProgress(MainActivity.mediaPlayer.getCurrentPosition());
-                            currentTime.setText(formatMMSS(MainActivity.mediaPlayer.getCurrentPosition()));
                             seekBar.setMax(MainActivity.mediaPlayer.getDuration());
+                            currentTime.setText(formatMMSS(MainActivity.mediaPlayer.getCurrentPosition()));
                             durationTime.setText(formatMMSS(MainActivity.mediaPlayer.getDuration()));
-                            Intent serviceIntent = new Intent(view.getContext(), NotificationService.class);
-                            view.getContext().startService(serviceIntent);
                             buttonPlay.setImageResource(R.drawable.baseline_pause_circle_outline_24);
                         }
                         else {
+                            if (NotificationService.mediaSession != null) {
+                                NotificationService.mediaSession.setPlaybackState(
+                                        new PlaybackStateCompat.Builder()
+                                                .setState(PlaybackStateCompat.STATE_PAUSED, MainActivity.mediaPlayer.getCurrentPosition(), 0f)
+                                                .setActions(PlaybackStateCompat.ACTION_PAUSE |
+                                                        PlaybackStateCompat.ACTION_PLAY |
+                                                        PlaybackStateCompat.ACTION_SKIP_TO_NEXT |
+                                                        PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS)
+                                                .build()
+                                );
+                            }
                             musicImage.setRotation(x);
                             buttonPlay.setImageResource(R.drawable.baseline_play_circle_outline_24);
                         }
