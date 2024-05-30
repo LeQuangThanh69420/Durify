@@ -1,27 +1,20 @@
 package huce.duriu.durifyandroid.RecyclerView;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 import huce.duriu.durifyandroid.Activity.MainActivity;
-import huce.duriu.durifyandroid.File.FileDownloadTask;
 import huce.duriu.durifyandroid.Model.Music;
 import huce.duriu.durifyandroid.R;
-import huce.duriu.durifyandroid.RecyclerView.AudioView;
-import huce.duriu.durifyandroid.RecyclerView.MusicView;
 import huce.duriu.durifyandroid.Service.AudioService;
 
 public class AudioAdapter extends RecyclerView.Adapter<AudioView> {
