@@ -1,4 +1,4 @@
-package huce.duriu.durifyandroid.File;
+package huce.duriu.durifyandroid.Service;
 
 import android.os.AsyncTask;
 import java.io.FileOutputStream;
@@ -9,12 +9,12 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class FileDownloadTask extends AsyncTask<String, Void, Boolean> {
+public class FileDownloadService extends AsyncTask<String, Void, Boolean> {
 
     private String destinationPath;
     private DownloadListener listener;
 
-    public FileDownloadTask(String destinationPath, DownloadListener listener) {
+    public FileDownloadService(String destinationPath, DownloadListener listener) {
         this.destinationPath = destinationPath;
         this.listener = listener;
     }
