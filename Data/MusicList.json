@@ -278,5 +278,126 @@
         "musicImageURL": "https://res.cloudinary.com/dslzbnfu8/image/upload/v1716578738/samples/Durify/suck_ebgjxq.png",
         "musicArtist": "unknown",
         "musicNation": "unknown"
+    },
+    {
+        "musicId": 36,
+        "musicName": "Best Friend",
+        "musicURL": "https://res.cloudinary.com/dyetihvgo/video/upload/v1717000558/music/y2mate.com_-_Rex_Orange_County_Best_Friend_Official_Audio_i2ssxz.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dyetihvgo/image/upload/v1717001753/thumbnail/bestfr_moop4c.jpg",
+        "musicArtist": "Rex Orange County",
+        "musicNation": "US"
+    },
+    {
+        "musicId": 37,
+        "musicName": "Sway to my beat in Cosmos",
+        "musicURL": "https://res.cloudinary.com/dyetihvgo/video/upload/v1717000557/music/y2mate.com_-_Sway_to_My_Beat_in_Cosmos_ua1yun.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dyetihvgo/image/upload/v1717001752/thumbnail/sway_oxytlu.jpg",
+        "musicArtist": "Robin",
+        "musicNation": "UK"
+    },
+    {
+        "musicId": 38,
+        "musicName": "Saturn",
+        "musicURL": "https://res.cloudinary.com/dyetihvgo/video/upload/v1717000557/music/utomp3.com_-_SZA_Saturn_uh8tsi.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dyetihvgo/image/upload/v1717001752/thumbnail/saturn_a4vxq5.jpg",
+        "musicArtist": "SZA",
+        "musicNation": "US"
+    },
+    {
+        "musicId": 39,
+        "musicName": "Loving is easy",
+        "musicURL": "https://res.cloudinary.com/dyetihvgo/video/upload/v1717000556/music/y2mate.com_-_Rex_Orange_County_Loving_is_Easy_feat_Benny_Sings_Official_Video_q5ltjn.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dyetihvgo/image/upload/v1717001753/thumbnail/luvEz_s5bblu.jpg",
+        "musicArtist": "Rex Orange County",
+        "musicNation": "US"
+    },
+    {
+        "musicId": 40,
+        "musicName": "Snooze",
+        "musicURL": "https://res.cloudinary.com/dyetihvgo/video/upload/v1717000556/music/y2mate.com_-_SZA_Snooze_Audio_s0sgmf.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dyetihvgo/image/upload/v1717001752/thumbnail/snooze_re8hhj.jpg",
+        "musicArtist": "SZA",
+        "musicNation": "US"
+    },
+    {
+        "musicId": 41,
+        "musicName": "Sofia",
+        "musicURL": "https://res.cloudinary.com/dyetihvgo/video/upload/v1717000556/music/y2mate.com_-_Sofia_n9ldng.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dyetihvgo/image/upload/v1717001754/thumbnail/sofia_mw8dav.jpg",
+        "musicArtist": "Clairo",
+        "musicNation": "US"
+    },
+    {
+        "musicId": 42,
+        "musicName": "Void",
+        "musicURL": "https://res.cloudinary.com/dyetihvgo/video/upload/v1717000556/music/y2mate.com_-_The_Neighbourhood_Void_Official_Audio_ftuqvb.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dyetihvgo/image/upload/v1717001755/thumbnail/void_fnfq4y.jpg",
+        "musicArtist": "The Neighborhood",
+        "musicNation": "US"
+    },
+    {
+        "musicId": 43,
+        "musicName": "Die For You",
+        "musicURL": "https://res.cloudinary.com/dyetihvgo/video/upload/v1717000555/music/y2mate.com_-_Die_For_You_ft_Grabbitz_Official_Music_Video_VALORANT_Champions_2021_eex3ft.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dyetihvgo/image/upload/v1717001810/thumbnail/die4u_lsrlxp.jpg",
+        "musicArtist": "Valorant",
+        "musicNation": "US"
+    },
+    {
+        "musicId": 44,
+        "musicName": "Shelter",
+        "musicURL": "https://res.cloudinary.com/dyetihvgo/video/upload/v1717000555/music/y2mate.com_-_Porter_Robinson_Madeon_Shelter_Official_Audio_ji5zg1.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dyetihvgo/image/upload/v1717001759/thumbnail/shelter_pjbjgw.jpg",
+        "musicArtist": "Porter Robinson",
+        "musicNation": "US"
+    },
+    {
+        "musicId": 45,
+        "musicName": "Renee",
+        "musicURL": "https://res.cloudinary.com/dyetihvgo/video/upload/v1717000555/music/y2mate.com_-_SALES_renee_ejfm4k.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dyetihvgo/image/upload/v1717001755/thumbnail/renee_qjtykq.jpg",
+        "musicArtist": "SALES",
+        "musicNation": "JP"
+    },
+    {
+        "musicId": 46,
+        "musicName": "Best Part",
+        "musicURL": "https://res.cloudinary.com/dyetihvgo/video/upload/v1717000554/music/y2mate.com_-_Daniel_Caesar_Best_Part_Audio_ft_HER_pohhou.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dyetihvgo/image/upload/v1717001756/thumbnail/bestPart_hiav78.jpg",
+        "musicArtist": "Daniel Ceasar",
+        "musicNation": "UK"
+    },
+    {
+        "musicId": 47,
+        "musicName": "Espresso",
+        "musicURL": "https://res.cloudinary.com/dyetihvgo/video/upload/v1717000554/music/y2mate.com_-_Sabrina_Carpenter_Espresso_Official_Audio_l647dk.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dyetihvgo/image/upload/v1717001757/thumbnail/espresso_shvtes.jpg",
+        "musicArtist": "Sabrina Carpenter",
+        "musicNation": "US"
+    },
+    {
+        "musicId": 48,
+        "musicName": "Greater than one",
+        "musicURL": "https://res.cloudinary.com/dyetihvgo/video/upload/v1717000554/music/y2mate.com_-_ericdoa_VALORANT_greater_than_one_Official_Audio_ewzwnb.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dyetihvgo/image/upload/v1717001808/thumbnail/greaterThan1_l7sn6j.jpg",
+        "musicArtist": "Valorant, Ericdoa",
+        "musicNation": "BR"
+    },
+    {
+        "musicId": 49,
+        "musicName": "Kungfu Pande",
+        "musicURL": "https://res.cloudinary.com/dyetihvgo/video/upload/v1717000553/music/y2mate.com_-_Kung_Fu_Panda_Young_Yayo_Wes_wfl2f6.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dyetihvgo/image/upload/v1717001809/thumbnail/kunfu_wtogoo.jpg",
+        "musicArtist": "unknown",
+        "musicNation": "unknown"
+    },
+    {
+        "musicId": 50,
+        "musicName": "Interstellar Journey",
+        "musicURL": "https://res.cloudinary.com/dyetihvgo/video/upload/v1717000552/music/y2mate.com_-_Interstellar_Journey_hxmzrp.mp3",
+        "musicImageURL": "https://res.cloudinary.com/dyetihvgo/image/upload/v1717001758/thumbnail/interJour_lncfoa.jpg",
+        "musicArtist": "Honkai Star Rail",
+        "musicNation": "CN"
     }
+    
 ]
