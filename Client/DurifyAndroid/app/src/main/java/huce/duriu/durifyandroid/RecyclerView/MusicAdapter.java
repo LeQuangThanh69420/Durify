@@ -17,11 +17,11 @@ import java.util.List;
 import huce.duriu.durifyandroid.Activity.LoadingActivity;
 import huce.duriu.durifyandroid.Activity.MainActivity;
 import huce.duriu.durifyandroid.Service.AudioService;
-import huce.duriu.durifyandroid.File.FileDownloadTask;
+import huce.duriu.durifyandroid.Service.FileDownloadService;
 import huce.duriu.durifyandroid.Model.Music;
 import huce.duriu.durifyandroid.R;
 
-public class MusicAdapter extends RecyclerView.Adapter<MusicView> implements FileDownloadTask.DownloadListener {
+public class MusicAdapter extends RecyclerView.Adapter<MusicView> implements FileDownloadService.DownloadListener {
     private List<Music> musics;
     public List<Music> getMusics() { return musics; }
     public void setMusics(List<Music> musics) { this.musics = musics; }
@@ -93,7 +93,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicView> implements Fil
                 if (LoadingActivity.isNetworkConnected(holder.itemView.getContext())) {
                     Music newAudio = new Music(newAudioName, newAudioPath);
                     if (!MainActivity.audios.contains(newAudio)) {
-                        FileDownloadTask downloadTask = new FileDownloadTask(newAudioPath, this);
+                        FileDownloadService downloadTask = new FileDownloadService(newAudioPath, this);
                         downloadTask.execute(music.getMusicURL());
                         MainActivity.audios.add(0, newAudio);
                         Toast.makeText(holder.itemView.getContext(), "Download " + newAudioName + " successfully", Toast.LENGTH_SHORT).show();
